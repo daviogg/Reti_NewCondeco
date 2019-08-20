@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reti.NewCondeco.DAL", "Reti.NewCondeco.DAL\Reti.NewCondeco.DAL.csproj", "{33FC68A4-59F5-4375-80D2-8ECB39B622D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reti.NewCondeco.DAL", "Reti.NewCondeco\Reti.NewCondeco.DAL.csproj", "{59438A35-FE47-43C5-B591-4302E3D5392F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{33FC68A4-59F5-4375-80D2-8ECB39B622D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33FC68A4-59F5-4375-80D2-8ECB39B622D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33FC68A4-59F5-4375-80D2-8ECB39B622D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33FC68A4-59F5-4375-80D2-8ECB39B622D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59438A35-FE47-43C5-B591-4302E3D5392F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59438A35-FE47-43C5-B591-4302E3D5392F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59438A35-FE47-43C5-B591-4302E3D5392F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59438A35-FE47-43C5-B591-4302E3D5392F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
