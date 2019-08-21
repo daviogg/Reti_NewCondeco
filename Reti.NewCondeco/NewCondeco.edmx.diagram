@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2997e245ffee41698b443f8738712f36" Name="Diagram1">
+      <Diagram DiagramId="9637024ca78043149e9a54d6b9e28171" Name="Diagram1">
         <EntityTypeShape EntityType="NewCondecoModel.Booking" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NewCondecoModel.Buildings" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="NewCondecoModel.Resources" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NewCondecoModel.Rooms" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCondecoModel.Building" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCondecoModel.Resource" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCondecoModel.Room" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="NewCondecoModel.FK_Booking_Resources" ManuallyRouted="false" />
         <AssociationConnector Association="NewCondecoModel.FK_Rooms_Buildings" ManuallyRouted="false" />
       </Diagram>

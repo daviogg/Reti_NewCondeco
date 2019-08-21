@@ -25,9 +25,9 @@ namespace Reti.NewCondeco
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Booking> Booking { get; set; }
-        public virtual DbSet<Buildings> Buildings { get; set; }
-        public virtual DbSet<Resources> Resources { get; set; }
-        public virtual DbSet<Rooms> Rooms { get; set; }
+        public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<Building> Buildings { get; set; }
+        public virtual DbSet<Resource> Resources { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
     }
 }

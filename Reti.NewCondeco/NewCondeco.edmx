@@ -99,9 +99,9 @@
           <Property Name="BResourceId" Type="Int32" Nullable="false" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Resources" Relationship="Self.FK_Booking_Resources" FromRole="Booking" ToRole="Resources" />
+          <NavigationProperty Name="Resource" Relationship="Self.FK_Booking_Resources" FromRole="Booking" ToRole="Resources" />
         </EntityType>
-        <EntityType Name="Buildings">
+        <EntityType Name="Building">
           <Key>
             <PropertyRef Name="BuildingId" />
           </Key>
@@ -111,7 +111,7 @@
           <Property Name="IsAvaible" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK_Rooms_Buildings" FromRole="Buildings" ToRole="Rooms" />
         </EntityType>
-        <EntityType Name="Resources">
+        <EntityType Name="Resource">
           <Key>
             <PropertyRef Name="ResourceID" />
           </Key>
@@ -121,9 +121,9 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Mail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsAvaible" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Booking" Relationship="Self.FK_Booking_Resources" FromRole="Resources" ToRole="Booking" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_Resources" FromRole="Resources" ToRole="Booking" />
         </EntityType>
-        <EntityType Name="Rooms">
+        <EntityType Name="Room">
           <Key>
             <PropertyRef Name="RoomId" />
           </Key>
@@ -132,10 +132,10 @@
           <Property Name="AvaiableSeats" Type="Int32" Nullable="false" />
           <Property Name="RoomBuildingId" Type="Int32" Nullable="false" />
           <Property Name="IsAvaible" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Buildings" Relationship="Self.FK_Rooms_Buildings" FromRole="Rooms" ToRole="Buildings" />
+          <NavigationProperty Name="Building" Relationship="Self.FK_Rooms_Buildings" FromRole="Rooms" ToRole="Buildings" />
         </EntityType>
         <Association Name="FK_Booking_Resources">
-          <End Role="Resources" Type="Self.Resources" Multiplicity="1" />
+          <End Role="Resources" Type="Self.Resource" Multiplicity="1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Resources">
@@ -147,10 +147,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rooms_Buildings">
-          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1">
+          <End Role="Buildings" Type="Self.Building" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Buildings">
               <PropertyRef Name="BuildingId" />
@@ -161,13 +161,13 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="NewCondecoEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Booking" EntityType="Self.Booking" />
-          <EntitySet Name="Buildings" EntityType="Self.Buildings" />
-          <EntitySet Name="Resources" EntityType="Self.Resources" />
-          <EntitySet Name="Rooms" EntityType="Self.Rooms" />
+          <EntitySet Name="Bookings" EntityType="Self.Booking" />
+          <EntitySet Name="Buildings" EntityType="Self.Building" />
+          <EntitySet Name="Resources" EntityType="Self.Resource" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
           <AssociationSet Name="FK_Booking_Resources" Association="Self.FK_Booking_Resources">
             <End Role="Resources" EntitySet="Resources" />
-            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_Rooms_Buildings" Association="Self.FK_Rooms_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
@@ -180,7 +180,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NewCondecoModelStoreContainer" CdmEntityContainer="NewCondecoEntities">
-          <EntitySetMapping Name="Booking">
+          <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="NewCondecoModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
@@ -192,7 +192,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Buildings">
-            <EntityTypeMapping TypeName="NewCondecoModel.Buildings">
+            <EntityTypeMapping TypeName="NewCondecoModel.Building">
               <MappingFragment StoreEntitySet="Buildings">
                 <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -202,7 +202,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Resources">
-            <EntityTypeMapping TypeName="NewCondecoModel.Resources">
+            <EntityTypeMapping TypeName="NewCondecoModel.Resource">
               <MappingFragment StoreEntitySet="Resources">
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -214,7 +214,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rooms">
-            <EntityTypeMapping TypeName="NewCondecoModel.Rooms">
+            <EntityTypeMapping TypeName="NewCondecoModel.Room">
               <MappingFragment StoreEntitySet="Rooms">
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -238,7 +238,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

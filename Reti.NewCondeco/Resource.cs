@@ -12,20 +12,22 @@ namespace Reti.NewCondeco
     using System;
     using System.Collections.Generic;
     
-    public partial class Buildings
+    public partial class Resource
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Buildings()
+        public Resource()
         {
-            this.Rooms = new HashSet<Rooms>();
+            this.Bookings = new HashSet<Booking>();
         }
     
-        public int BuildingId { get; set; }
+        public int ResourceID { get; set; }
+        public string UserName { get; set; }
+        public string SurName { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+        public string Mail { get; set; }
         public bool IsAvaible { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rooms> Rooms { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }

@@ -12,14 +12,14 @@ namespace Reti.NewCondeco
     using System;
     using System.Collections.Generic;
     
-    public partial class Booking
+    public partial class Room
     {
-        public int BookingId { get; set; }
-        public string Description { get; set; }
-        public int BResourceId { get; set; }
-        public System.DateTime DateStart { get; set; }
-        public System.DateTime DateEnd { get; set; }
+        public int RoomId { get; set; }
+        public string Name { get; set; }
+        public int AvaiableSeats { get; set; }
+        public int RoomBuildingId { get; set; }
+        public bool IsAvaible { get; set; }
     
-        public virtual Resource Resource { get; set; }
+        public virtual Building Building { get; set; }
     }
 }

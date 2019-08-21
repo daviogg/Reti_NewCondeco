@@ -54,9 +54,13 @@
     <Compile Include="Booking.cs">
       <DependentUpon>NewCondeco.tt</DependentUpon>
     </Compile>
-    <Compile Include="Buildings.cs">
+    <Compile Include="Building.cs">
       <DependentUpon>NewCondeco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IBookingRepository.cs" />
+    <Compile Include="Interfaces\IBuildingRepository.cs" />
+    <Compile Include="Interfaces\IResourceRepository.cs" />
+    <Compile Include="Interfaces\IRoomRepository.cs" />
     <Compile Include="NewCondeco.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -73,10 +77,16 @@
       <DependentUpon>NewCondeco.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.cs">
+    <Compile Include="Repositories\BookingRepository.cs" />
+    <Compile Include="Repositories\BuildingRepository.cs" />
+    <Compile Include="Repositories\EFRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Repositories\ResourceRepository.cs" />
+    <Compile Include="Repositories\RoomRepository.cs" />
+    <Compile Include="Resource.cs">
       <DependentUpon>NewCondeco.tt</DependentUpon>
     </Compile>
-    <Compile Include="Rooms.cs">
+    <Compile Include="Room.cs">
       <DependentUpon>NewCondeco.tt</DependentUpon>
     </Compile>
     <Compile Include="UnitOfWork.cs" />
@@ -91,9 +101,6 @@
       <DependentUpon>NewCondeco.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NewCondeco.Context.tt">
