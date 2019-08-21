@@ -9,19 +9,24 @@ namespace Reti.NewCondeco.Repositories
 {
     public class RoomRepository : EFRepository<Room>, IRoomRepository
     {
-        public int Add(string name, int avaiableSeat, int buildingId, bool isAvaible)
+        public int Add(Room item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
+            ((NewCondecoEntities)Context).Rooms.Add(item);
+            return item.RoomId;
         }
 
-        public void Delete(int roomId)
+        public void Delete(Room item)
         {
-            throw new NotImplementedException();
+            ((NewCondecoEntities)Context).Rooms.Remove(item);
         }
 
         public Room Get(int roomId)
         {
-            throw new NotImplementedException();
+            return ((NewCondecoEntities)Context).Rooms.SingleOrDefault(i => i.RoomId == roomId);
         }
     }
 }

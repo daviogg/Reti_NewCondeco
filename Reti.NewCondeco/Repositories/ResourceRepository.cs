@@ -9,19 +9,24 @@ namespace Reti.NewCondeco.Repositories
 {
     public class ResourceRepository : EFRepository<Resource>, IResourceRepository
     {
-        public int Add(int resourceId, string username, string surname, string firstname, string mail, bool isAvaible)
+        public int Add(Resource item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
+             ((NewCondecoEntities)Context).Resources.Add(item);
+            return item.ResourceID;
         }
 
-        public void Delete(int resourceId)
+        public void Delete(Resource item)
         {
-            throw new NotImplementedException();
+            ((NewCondecoEntities)Context).Resources.Remove(item);
         }
 
         public Resource Get(int resourceId)
         {
-            throw new NotImplementedException();
+            return ((NewCondecoEntities)Context).Resources.SingleOrDefault(i => i.ResourceID == resourceId);
         }
     }
 }

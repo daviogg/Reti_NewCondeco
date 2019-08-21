@@ -10,7 +10,7 @@ namespace Reti.NewCondeco.Interfaces
     {
         Resource Get(int resourceId);
         IEnumerable<Resource> GetAll();
-        int Add(int resourceId, string username, string surname, string firstname, string mail, bool isAvaible );
-        void Delete(int resourceId);
+        int Add(Resource item);
+        void Delete(Resource item);
     }
 }

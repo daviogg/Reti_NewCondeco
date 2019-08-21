@@ -68,15 +68,6 @@ namespace Reti.NewCondeco.Repositories
             return DbSet.Max<TEntity>(where);
         }
 
-        public void Delete(TEntity entity)
-        {
-            if (Context.Entry(entity).State == System.Data.Entity.EntityState.Detached)
-            {
-                DbSet.Attach(entity);
-            }
-            DbSet.Remove(entity);
-        }
-
         public void DeleteAll(List<TEntity> listToDelete)
         {
             foreach (TEntity ent in listToDelete)
@@ -87,11 +78,6 @@ namespace Reti.NewCondeco.Repositories
                 }
                 DbSet.Remove(ent);
             }
-        }
-
-        public virtual void Add(TEntity entity)
-        {
-            DbSet.Add(entity);
         }
 
         public virtual void Update(TEntity entity)

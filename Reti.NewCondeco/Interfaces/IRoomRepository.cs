@@ -10,7 +10,7 @@ namespace Reti.NewCondeco.Interfaces
     {
         Room Get(int roomId);
         IEnumerable<Room> GetAll();
-        int Add(string name, int avaiableSeat, int buildingId, bool isAvaible);
-        void Delete(int roomId);
+        int Add(Room item);
+        void Delete(Room item);
     }
 }

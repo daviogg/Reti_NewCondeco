@@ -10,7 +10,7 @@ namespace Reti.NewCondeco.Interfaces
     {
         Booking Get(int bookingId);
         IEnumerable<Booking> GetAll();                               
-        int Add(string description, int resourceId, DateTime startDate, DateTime endDate);                  
-        void Delete(int bookingId);
+        int Add(Booking item);                  
+        void Delete(Booking item);
     }
 }

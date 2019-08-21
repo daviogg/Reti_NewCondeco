@@ -10,7 +10,7 @@ namespace Reti.NewCondeco.Interfaces
     {
         Building Get(int buildingId);
         IEnumerable<Building> GetAll();
-        int Add(string name, string address, bool isAvaible);
-        void Delete(int buildingId);
+        int Add(Building item);
+        void Delete(Building item);
     }
 }

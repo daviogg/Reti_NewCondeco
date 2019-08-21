@@ -9,19 +9,24 @@ namespace Reti.NewCondeco.Repositories
 {
     public class BookingRepository : EFRepository<Booking>, IBookingRepository
     {
-        public int Add(string description, int resourceId, DateTime startDate, DateTime endDate)
+        public int Add(Booking item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
+            ((NewCondecoEntities)Context).Bookings.Add(item);
+            return item.BookingId;
         }
 
-        public void Delete(int bookingId)
+        public void Delete(Booking item)
         {
-            throw new NotImplementedException();
+            ((NewCondecoEntities)Context).Bookings.Remove(item);
         }
 
         public Booking Get(int bookingId)
         {
-            throw new NotImplementedException();
+            return ((NewCondecoEntities)Context).Bookings.SingleOrDefault(i => i.BookingId == bookingId);
         }
     }
 }

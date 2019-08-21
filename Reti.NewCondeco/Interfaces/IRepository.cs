@@ -14,8 +14,6 @@ namespace Reti.NewCondeco.Repositories
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> where);
         TEntity Single(Expression<Func<TEntity, bool>> where);
         TEntity First(Expression<Func<TEntity, bool>> where);
-        void Delete(TEntity entity);
-        void Add(TEntity entity);
         void Update(TEntity entity);
     }
 }
