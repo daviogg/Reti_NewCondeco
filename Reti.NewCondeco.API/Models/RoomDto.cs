@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Reti.NewCondeco.API.Models
 {
-    public class RoomModel
+    public class RoomDto
     {
         public int RoomId { get; set; }
         public string Name { get; set; }

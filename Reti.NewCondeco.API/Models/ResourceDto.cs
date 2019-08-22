@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Reti.NewCondeco.API.Models
 {
-    public class ResourceModel
+    public class ResourceDto
     {
         public int ResourceID { get; set; }
         public string UserName { get; set; }
@@ -14,6 +14,6 @@ namespace Reti.NewCondeco.API.Models
         public string Mail { get; set; }
         public bool IsAvaible { get; set; }
 
-        public IEnumerable<BookingModel> Bookings { get; set; }
+        public IEnumerable<BookingDto> Bookings { get; set; }
     }
 }
