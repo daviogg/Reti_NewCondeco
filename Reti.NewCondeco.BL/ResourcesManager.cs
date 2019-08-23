@@ -15,13 +15,12 @@ namespace Reti.NewCondeco.BL
         //TODO: Define return type
         public void UpdateResource(Resource resource)
         {
-
             //TODO: Try Catch
             ResourceRepository resourceRepo = new ResourceRepository();
 
-            var reso = resourceRepo.Get(resource.ResourceID);
+            var repo = resourceRepo.Get(resource.ResourceID);
 
-            if (reso == null)
+            if (repo == null)
             {
                 resourceRepo.Add(resource);
             }
@@ -31,6 +30,20 @@ namespace Reti.NewCondeco.BL
             }
 
             GlobalUnitOfWork.Commit();
+        }
+
+        public void DeleteResource(Resource resource)
+        {
+            try
+            {
+                ResourceRepository resourceRepo = new ResourceRepository();
+                resourceRepo.Delete(resource);
+                GlobalUnitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
     }
