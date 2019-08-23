@@ -19,9 +19,9 @@ namespace Reti.NewCondeco.BL
             //TODO: Try Catch
             ResourceRepository resourceRepo = new ResourceRepository();
 
-            _ = resourceRepo.Get(resource.ResourceID);
+            var reso = resourceRepo.Get(resource.ResourceID);
 
-            if (resourceRepo == null)
+            if (reso == null)
             {
                 resourceRepo.Add(resource);
             }

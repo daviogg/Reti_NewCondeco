@@ -25,18 +25,18 @@ namespace Reti.NewCondeco.API.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public IHttpActionResult PostResource(ResourceDto rc)
+        [HttpPost]
+        public IHttpActionResult PostResource([FromBody] ResourceDto rc)
         {
             ResourcesManager rm = new ResourcesManager();
 
             //TODO: Config Automapper
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Resource, ResourceDto>();
+                cfg.CreateMap<ResourceDto, Resource>();
             });
 
             IMapper iMapper = config.CreateMapper();
-            var source = new ResourceDto();
+            var source = rc;
             var destination = iMapper.Map<ResourceDto, Resource>(source);
 
             rm.UpdateResource(destination);
