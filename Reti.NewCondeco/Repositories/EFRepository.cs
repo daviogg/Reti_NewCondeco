@@ -72,7 +72,7 @@ namespace Reti.NewCondeco.Repositories
         {
             foreach (TEntity ent in listToDelete)
             {
-                if (Context.Entry(ent).State == System.Data.Entity.EntityState.Detached)
+                if (Context.Entry(ent).State == EntityState.Detached)
                 {
                     DbSet.Attach(ent);
                 }
@@ -83,12 +83,12 @@ namespace Reti.NewCondeco.Repositories
         public virtual void Update(TEntity entity)
         {
             DbSet.Attach(entity);
-            Context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            Context.Entry(entity).State = EntityState.Modified;
         }
 
         public TEntity SingleWithNavProp(Expression<Func<TEntity, bool>> where, string propToLoad)
         {
-            return DbSet.Where<TEntity>(where).Include(propToLoad).SingleOrDefault();
+            return DbSet.Where(where).Include(propToLoad).SingleOrDefault();
         }
     }
 }

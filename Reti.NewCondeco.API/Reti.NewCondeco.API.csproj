@@ -110,6 +110,20 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reti.NewCondeco.BL\Reti.NewCondeco.BL.csproj">
+      <Project>{E82076E0-A360-4B1F-849E-8F6823B5EC98}</Project>
+      <Name>Reti.NewCondeco.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reti.NewCondeco.Entities\Reti.NewCondeco.Entities.csproj">
+      <Project>{af39d236-8880-41b2-826d-eb8e9ceaec3f}</Project>
+      <Name>Reti.NewCondeco.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reti.NewCondeco\Reti.NewCondeco.DAL.csproj">
+      <Project>{59438A35-FE47-43C5-B591-4302E3D5392F}</Project>
+      <Name>Reti.NewCondeco.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
