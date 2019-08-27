@@ -12,11 +12,6 @@ namespace Reti.NewCondeco.API.Controllers
 {
     public class ResourceController: ApiController
     {
-        [HttpGet]
-        public IEnumerable<ResourceDto> GetAllResources()
-        {
-            return null;
-        }
 
         [HttpGet]
         public IHttpActionResult GetResource(int id)
@@ -30,17 +25,28 @@ namespace Reti.NewCondeco.API.Controllers
         {
             ResourcesManager rm = new ResourcesManager();
 
-            //TODO: Config Automapper
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<ResourceDto, Resource>();
-            });
-
-            IMapper iMapper = config.CreateMapper();
+            IMapper iMapper = AutomapperInitialize();
             var source = rc;
             var destination = iMapper.Map<ResourceDto, Resource>(source);
 
             rm.UpdateResource(destination);
             return Ok();
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetAllResources()
+        {
+            ResourcesManager rm = new ResourcesManager();
+            return Ok(rm.ReturnAllResources());
+        }
+
+        private IMapper AutomapperInitialize()
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<ResourceDto, Resource>();
+            });
+
+            return config.CreateMapper();
         }
     }
 }

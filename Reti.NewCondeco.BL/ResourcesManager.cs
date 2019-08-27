@@ -15,21 +15,41 @@ namespace Reti.NewCondeco.BL
         //TODO: Define return type
         public void UpdateResource(Resource resource)
         {
-            //TODO: Try Catch
-            ResourceRepository resourceRepo = new ResourceRepository();
-
-            var repo = resourceRepo.Get(resource.ResourceID);
-
-            if (repo == null)
+            try
             {
-                resourceRepo.Add(resource);
+                ResourceRepository resourceRepo = new ResourceRepository();
+
+                var repo = resourceRepo.Get(resource.ResourceID);
+                //TODO: Separate Add and Update logics
+                if (repo == null)
+                {
+                    resourceRepo.Add(resource);
+                }
+                else
+                {
+                    resourceRepo.Update(resource);
+                }
             }
-            else
-            {
-                resourceRepo.Update(resource);
+            catch(Exception ex){
+                throw ex;
             }
 
             GlobalUnitOfWork.Commit();
+        }
+
+        public IEnumerable<Resource> ReturnAllResources()
+        {
+            IEnumerable<Resource> resources = null;
+            try { 
+                ResourceRepository resourceRepo = new ResourceRepository();
+
+                resources =  resourceRepo.GetAll();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            return resources;
         }
 
         public void DeleteResource(Resource resource)

@@ -12,5 +12,6 @@ namespace Reti.NewCondeco.Interfaces
         IEnumerable<Resource> GetAll();
         int Add(Resource item);
         void Delete(Resource item);
+
     }
 }
