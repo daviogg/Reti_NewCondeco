@@ -1,5 +1,5 @@
 ﻿
-var webApiUri = 'http://localhost:8089/api';
+var webApiUri = 'https://localhost:44394/api/';
 
 
 class Resource {
@@ -45,7 +45,7 @@ function getAll() {
     //        alert('An error occurred while loading Users and UserTitles');
     //    });
 
-    $.getJSON(webApiUri + '/resource/GetAllResources').done(resource => {
+    $.getJSON(webApiUri + 'resource/GetAllResources/').done(resource => {
 
         $.each(resource, (key, item: Resource) => {
             $('#list-of-user-titles').append('<li class="list-group-item">' + item.Username + '<a style="margin-left:5px;" href="#" onclick="viewUserTitleDetails(' + item.ResourceId + ')">(View)</a><a style="margin-left:5px;" href="#" onclick="updateUserTitle(' + item.ResourceId + ');">(Update)</a><a style="margin-left:5px;" href="#" onclick="deleteUserTitle(' + item.ResourceId + ');">(Delete)</a></li>');

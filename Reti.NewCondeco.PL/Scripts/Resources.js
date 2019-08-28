@@ -1,4 +1,4 @@
-var webApiUri = 'http://localhost:8089/api';
+var webApiUri = 'https://localhost:44394/api/';
 var Resource = /** @class */ (function () {
     function Resource() {
     }
@@ -35,7 +35,7 @@ function getAll() {
     //    .fail(function (jqXHR, textStatus, err) {
     //        alert('An error occurred while loading Users and UserTitles');
     //    });
-    $.getJSON(webApiUri + '/resource/GetAllResources').done(function (resource) {
+    $.getJSON(webApiUri + 'resource/GetAllResources/').done(function (resource) {
         $.each(resource, function (key, item) {
             $('#list-of-user-titles').append('<li class="list-group-item">' + item.Username + '<a style="margin-left:5px;" href="#" onclick="viewUserTitleDetails(' + item.ResourceId + ')">(View)</a><a style="margin-left:5px;" href="#" onclick="updateUserTitle(' + item.ResourceId + ');">(Update)</a><a style="margin-left:5px;" href="#" onclick="deleteUserTitle(' + item.ResourceId + ');">(Delete)</a></li>');
             $('#select-user-titles').append('<option value="' + item.ResourceId + '">' + item.Surname + '</option>');
