@@ -37,8 +37,8 @@ function getAll() {
     //    });
     $.getJSON(webApiUri + 'resource/GetAllResources/').done(function (resource) {
         $.each(resource, function (key, item) {
-            $('#list-of-user-titles').append('<li class="list-group-item">' + item.Username + '<a style="margin-left:5px;" href="#" onclick="viewUserTitleDetails(' + item.ResourceId + ')">(View)</a><a style="margin-left:5px;" href="#" onclick="updateUserTitle(' + item.ResourceId + ');">(Update)</a><a style="margin-left:5px;" href="#" onclick="deleteUserTitle(' + item.ResourceId + ');">(Delete)</a></li>');
-            $('#select-user-titles').append('<option value="' + item.ResourceId + '">' + item.Surname + '</option>');
+            //$('#list-of-resources').append('<li><a href="#">' + item.UserName + '</a></li>');
+            $('#list-of-resources').append('<button type="button" class="list-group-item" >' + item.UserName + '</button>');
         });
     });
 }

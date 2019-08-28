@@ -15,12 +15,12 @@ namespace Reti.NewCondeco.API.Controllers
     public class ResourceController: ApiController
     {
 
-        [HttpGet]
-        public IHttpActionResult GetResource(int id)
-        {
+        //[HttpGet]
+        //public IHttpActionResult GetResource(int id)
+        //{
           
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         [HttpPost]
         public IHttpActionResult PostResource([FromBody] ResourceDto rc)
