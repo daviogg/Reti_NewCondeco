@@ -10,8 +10,7 @@ namespace Reti.NewCondeco.BL
 {
     public class ResourcesManager
     {
-        public object DAL { get; private set; }
-
+    
         //TODO: Define return type
         public void UpdateResource(Resource resource)
         {
