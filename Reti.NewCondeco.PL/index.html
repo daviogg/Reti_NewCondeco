@@ -18,20 +18,20 @@
 <body>
     <!-- Fixed navigation -->
     <ul class="nav nav-pills">
-        <li role="presentation" class="active"><a href="#">Risorse</a></li>
-        <li role="presentation"><a href="#">Aule</a></li>
-        <li role="presentation"><a href="#">Edifici</a></li>
-        <li role="presentation"><a href="#">Prenotazioni</a></li>
+        <li role="presentation" id="resources-nav"><a href="#" onclick="activeNav(0)">Risorse</a></li>
+        <li role="presentation" id="rooms-nav"><a href="#" onclick="activeNav(1)">Aule</a></li>
+        <li role="presentation" id="buildings-nav"><a href="#" onclick="activeNav(2)">Edifici</a></li>
+        <li role="presentation" id="booking-nav"><a href="#" onclick="activeNav(3)">Prenotazioni</a></li>
     </ul>
 
     <section id="resourcesSection" class="container">
         <section id="createResource">
             <div class="row">
                 <form id="frmUser" onsubmit="">
-                    <div class="form-group">
+                    <!--<div class="form-group" >
                         <label for="user-username">Username</label>
-                        <input type="text" class="form-control" id="user-username" name="user-username" placeholder="Username">
-                    </div>
+                        <input type="text" class="form-control" id="user-username" name="user-username" placeholder="Username" disabled>
+                    </div>-->
                     <div class="form-group">
                         <label for="user-surname">Cognome</label>
                         <input type="text" class="form-control" id="user-surname" name="user-surname" placeholder="Cognome">
@@ -44,35 +44,21 @@
                         <label for="email">E-Mail</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com">
                     </div>
-                    <button type="button" class="btn btn-default" onclick="createUser();">Create</button>
+                    <button type="button" class="btn btn-default" onclick="createResource();">Create</button>
                 </form>
             </div>
 
         </section>
         <section id="resourcesDetail">
-            <!--<div class="form-group">
-                <label for="user-title">Risorse</label>
-                <select class="form-control" id="select-resources" name="select-resources"></select>
-            </div>-->
-            <!--<div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                    Dropdown Example
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" id="list-of-s">
-                    <li><a href="#">HTML</a></li>
-                    <li><a href="#">CSS</a></li>
-                    <li><a href="#">JavaScript</a></li>
-                </ul>
-            </div>-->
-
-            <div class="list-group" id="list-of-resources">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>LISTA RISORSE</label>
+                    <div class="list-group" id="list-of-resources"></div>
+                </div>
+                <div class="col-md-6" id="resource-detail"></div>
             </div>
 
         </section>
-
-
-
     </section>
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>

@@ -28,5 +28,10 @@ namespace Reti.NewCondeco.Repositories
         {
             return ((NewCondecoEntities)Context).Resources.SingleOrDefault(i => i.ResourceID == resourceId);
         }
+
+        public int GetMaxId()
+        {
+            return ((NewCondecoEntities)Context).Resources.Max(i => i.ResourceID);
+        }
     }
 }

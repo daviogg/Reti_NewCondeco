@@ -1,5 +1,12 @@
-﻿
-var webApiUri = 'https://localhost:44394/api/';
+﻿//#region Page code
+$(document).ready(() => {
+    // Retrieve the lists of Users and UserTitles
+    _self.getAll();
+
+});
+//#endregion
+
+var webApiUri = 'https://localhost:44394/api/resources';
 
 
 class Resource {
@@ -12,46 +19,105 @@ class Resource {
 }
 
 let _self = this;
-//#endregion
 
-//#region Page code
-$(document).ready(() => {
-    // Retrieve the lists of Users and UserTitles
-    _self.getAll();
-
-});
 
 function getAll() {
-    $('#select-resources').empty();
-    // Retrieve the list of User Titles
-    //$.getJSON(webApiUri + '/usertitles')
-    //    .done(function (userTitles) {
-    //        // Retrieve the list of Users
-    //        $.getJSON(webApiUri + '/users')
-    //            .done(function (users) {
-    //                retrievedUserTitles = userTitles;
-    //                $.each(userTitles, function (key, item) {
-    //                    $('#list-of-user-titles').append('<li class="list-group-item">' + formatUserTitle(item) + '<a style="margin-left:5px;" href="#" onclick="viewUserTitleDetails(' + item.Id + ')">(View)</a><a style="margin-left:5px;" href="#" onclick="updateUserTitle(' + item.Id + ');">(Update)</a><a style="margin-left:5px;" href="#" onclick="deleteUserTitle(' + item.Id + ');">(Delete)</a></li>');
-    //                    $('#select-user-titles').append('<option value="' + item.Id + '">' + item.Description + '</option>');
-    //                });
-    //                $.each(users, function (key, item) {
-    //                    $('#list-of-users').append('<li class="list-group-item">' + formatUser(item) + '<a style="margin-left:5px;" href="#" onclick="viewUserDetails(' + item.Id + ')">(View)</a><a style="margin-left:5px;" href="#" onclick="updateUser(' + item.Id + ');">(Update)</a><a style="margin-left:5px;" href="#" onclick="deleteUser(' + item.Id + ');">(Delete)</a></li>');
-    //                });
-    //            })
-    //            .fail(function (jqXHR, textStatus, err) {
-    //                alert('An error occurred while loading Users and UserTitles');
-    //            });
-    //    })
-    //    .fail(function (jqXHR, textStatus, err) {
-    //        alert('An error occurred while loading Users and UserTitles');
-    //    });
-
-    $.getJSON(webApiUri + 'resource/GetAllResources/').done(function(resource){
+    $('#list-of-resources').empty();
+    $.getJSON(webApiUri + '/GetAll/').done(resource => {
 
         $.each(resource, (key, item: Resource) => {
-            //$('#list-of-resources').append('<li><a href="#">' + item.UserName + '</a></li>');
-            $('#list-of-resources').append('<button type="button" class="list-group-item" >' + item.UserName + '</button>');
+            $('#list-of-resources').append(`<button type="button" class="list-group-item"  onclick="getResourceDetails(${item.ResourceID})">${item.UserName}</button>`);
         });
 
+    });
+}
+
+function createResource(): void {
+
+    $('#frmUser').empty();
+    let name: string = $('#user-name').val().toString();
+    let surname: string = $('#user-surname').val().toString();
+    let username: string = "";
+
+    if (surname.length >= 4) {
+        username = surname.substr(0, 4);
+        if (name.length >= 2)
+            username += name.substr(0, 2);
+        else
+            username += name;
+    } else {
+        if (surname.length < 4)
+            username = name + surname;
+        else
+            username = name + surname.substr(0, 4);
+    }
+
+    $.ajax({
+        type: "POST",
+        url: webApiUri + '/PostResource',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            ResourceID: -1,
+            UserName: username,
+            SurName: $('#user-surname').val(),
+            Name: $('#user-name').val(),
+            Mail: $('#email').val(),
+            IsAvaible: true,
+            Booking: [],
+        })
+    }).done(function (data) {
+        console.log(JSON.stringify(data));
+        $('#frmUser').append(`<label>Utente Creato! Username : ${username}</label>`);
+        _self.getAll();
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert("An error has occurred while creating resource");
+    });
+
+}
+
+function getResourceDetails(resourceId: number) {
+    $('#resource-detail').empty();
+    $.getJSON(webApiUri + '/GetResource/' + resourceId)
+        .done(function (data: Resource) {
+            
+            let isAvaible: string = data.IsAvaible ? "Si" : "No";
+
+            $('#resource-detail').append(`<label>DETTAGLIO RISORSA <a style="margin-left:5px;" onclick="deleteResource(${data.ResourceID})">Delete</a></label>
+                    <div class="row" id="username-detail">
+                        <p class="col-md-6">Username:</p>
+                        <p> ${data.UserName} </p>
+                    </div>
+                    <div class="row" id="name-detail">
+                        <p class="col-md-6">Nome:</p>
+                        <p> ${data.Name} </p>
+                    </div>
+                    <div class="row" id="surname-detail">
+                        <p class="col-md-6">Cognome:</p>
+                        <p> ${data.SurName} </p>
+                    </div>
+                    <div class="row" id="mail-detail">
+                        <p class="col-md-6">Mail:</p>
+                        <p> ${data.Mail} </p>
+                    </div>
+                    <div class="row" id="avaible-detail">
+                        <p class="col-md-6">Disponibile:</p>
+                        <p> ${isAvaible} </p>
+                    </div>`);
+        })
+        .fail(function (jqXHR, textStatus, err) {
+            alert('An error occurred while retrieving Resource details');
+        });
+}
+function deleteResource(resourceId: number) {
+  
+    $.ajax({
+        type: "DELETE",
+        url: webApiUri + '/DeleteResource/' + resourceId,
+        contentType: 'application/json'
+    }).done(function (data) {
+        $('#resource-detail').empty();
+        _self.getAll();
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert("An error has occurred while deleting UserTitle");
     });
 }

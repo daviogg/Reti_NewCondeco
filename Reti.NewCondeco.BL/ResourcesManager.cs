@@ -37,9 +37,42 @@ namespace Reti.NewCondeco.BL
             GlobalUnitOfWork.Commit();
         }
 
+        public Resource GetResourceById(int id)
+        {
+            Resource result;
+            try
+            {
+                ResourceRepository resourceRepo = new ResourceRepository();
+                result = resourceRepo.Get(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return result;
+        }
+
+
+        public void CreateResource(Resource resource)
+        {
+            ResourceRepository resourceRepo = new ResourceRepository();
+            try
+            {
+                resource.ResourceID = resourceRepo.GetMaxId() + 1;
+                resourceRepo.Add(resource);
+                GlobalUnitOfWork.Commit();
+            }
+            catch (Exception ex )
+            {
+
+                throw ex;
+            }
+        }
+
         public IEnumerable<Resource> ReturnAllResources()
         {
-            IEnumerable<Resource> resources = null;
+            IEnumerable<Resource> resources;
             try { 
                 ResourceRepository resourceRepo = new ResourceRepository();
 
@@ -52,12 +85,13 @@ namespace Reti.NewCondeco.BL
             return resources;
         }
 
-        public void DeleteResource(Resource resource)
+        public void DeleteResource(int resourceID)
         {
             try
             {
                 ResourceRepository resourceRepo = new ResourceRepository();
-                resourceRepo.Delete(resource);
+                var r = resourceRepo.Get(resourceID);
+                resourceRepo.Delete(r);
                 GlobalUnitOfWork.Commit();
             }
             catch (Exception ex)
