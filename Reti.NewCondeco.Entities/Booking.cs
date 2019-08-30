@@ -19,7 +19,9 @@ namespace Reti.NewCondeco.Entities
         public int BResourceId { get; set; }
         public System.DateTime DateStart { get; set; }
         public System.DateTime DateEnd { get; set; }
+        public int BRoomId { get; set; }
     
         public virtual Resource Resource { get; set; }
+        public virtual Room Room { get; set; }
     }
 }

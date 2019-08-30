@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NewCondecoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NewCondecoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Booking">
           <Key>
             <PropertyRef Name="BookingId" />
@@ -14,6 +14,7 @@
           <Property Name="BResourceId" Type="int" Nullable="false" />
           <Property Name="DateStart" Type="datetime" Nullable="false" />
           <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="BRoomId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Buildings">
           <Key>
@@ -57,6 +58,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Booking_Rooms">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="BRoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Rooms_Buildings">
           <End Role="Buildings" Type="Self.Buildings" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -80,13 +93,16 @@
             <End Role="Resources" EntitySet="Resources" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
+          <AssociationSet Name="FK_Booking_Rooms" Association="Self.FK_Booking_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
           <AssociationSet Name="FK_Rooms_Buildings" Association="Self.FK_Rooms_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NewCondecoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -100,6 +116,8 @@
           <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Resource" Relationship="Self.FK_Booking_Resources" FromRole="Booking" ToRole="Resources" />
+          <Property Name="BRoomId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Room" Relationship="NewCondecoModel.FK_Booking_Rooms" FromRole="Booking" ToRole="Room" />
         </EntityType>
         <EntityType Name="Building">
           <Key>
@@ -133,6 +151,7 @@
           <Property Name="RoomBuildingId" Type="Int32" Nullable="false" />
           <Property Name="IsAvaible" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Building" Relationship="Self.FK_Rooms_Buildings" FromRole="Rooms" ToRole="Buildings" />
+          <NavigationProperty Name="Bookings" Relationship="NewCondecoModel.FK_Booking_Rooms" FromRole="Room" ToRole="Booking" />
         </EntityType>
         <Association Name="FK_Booking_Resources">
           <End Role="Resources" Type="Self.Resource" Multiplicity="1" />
@@ -173,7 +192,23 @@
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
+          <AssociationSet Name="FK_Booking_Rooms" Association="NewCondecoModel.FK_Booking_Rooms">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Booking_Rooms">
+          <End Type="NewCondecoModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="NewCondecoModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="BRoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -183,6 +218,7 @@
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="NewCondecoModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="BRoomId" ColumnName="BRoomId" />
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="BResourceId" ColumnName="BResourceId" />

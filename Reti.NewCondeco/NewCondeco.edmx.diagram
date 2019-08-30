@@ -5,12 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9637024ca78043149e9a54d6b9e28171" Name="Diagram1">
-        <EntityTypeShape EntityType="NewCondecoModel.Booking" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCondecoModel.Booking" Width="1.5" PointX="3.5" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="NewCondecoModel.Building" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="NewCondecoModel.Resource" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="NewCondecoModel.Room" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="NewCondecoModel.FK_Booking_Resources" ManuallyRouted="false" />
         <AssociationConnector Association="NewCondecoModel.FK_Rooms_Buildings" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCondecoModel.FK_Booking_Rooms" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

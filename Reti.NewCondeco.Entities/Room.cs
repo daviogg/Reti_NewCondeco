@@ -14,6 +14,12 @@ namespace Reti.NewCondeco.Entities
     
     public partial class Room
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Room()
+        {
+            this.Bookings = new HashSet<Booking>();
+        }
+    
         public int RoomId { get; set; }
         public string Name { get; set; }
         public int AvaiableSeats { get; set; }
@@ -21,5 +27,7 @@ namespace Reti.NewCondeco.Entities
         public bool IsAvaible { get; set; }
     
         public virtual Building Building { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }
