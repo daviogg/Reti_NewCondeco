@@ -1,4 +1,5 @@
 var _this = this;
+var webApiUri = 'https://localhost:44394/api/';
 //#region Page code
 $(document).ready(function () {
     // Retrieve the lists of Users and UserTitles
@@ -26,11 +27,16 @@ function activeNav(type) {
             resetNavActiveClass();
             hideAllSections();
             $("#rooms-nav").addClass("Active");
+            $("#rooms-section").show();
+            //_self.getAllBuildings();
+            _self.getAllRooms();
             break;
         case ElementType.edifici:
             resetNavActiveClass();
             hideAllSections();
             $("#buildings-nav").addClass("Active");
+            $("#buildings-section").show();
+            _self.getAllBuildings();
             break;
         case ElementType.prenotazioni:
             resetNavActiveClass();
@@ -48,5 +54,7 @@ function resetNavActiveClass() {
 }
 function hideAllSections() {
     $("#resources-section").hide();
+    $("#buildings-section").hide();
+    $("#rooms-section").hide();
 }
 //# sourceMappingURL=Manager.js.map

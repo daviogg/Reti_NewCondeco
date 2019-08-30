@@ -6,7 +6,7 @@ $(document).ready(() => {
 });
 //#endregion
 
-var webApiUri = 'https://localhost:44394/api/resources';
+//var webApiUri = 'https://localhost:44394/api/';
 
 
 class Resource {
@@ -23,7 +23,7 @@ let _self = this;
 
 function getAll() {
     $('#list-of-resources').empty();
-    $.getJSON(webApiUri + '/GetAll/').done(resource => {
+    $.getJSON(webApiUri + 'resources/GetAll/').done(resource => {
 
         $.each(resource, (key, item: Resource) => {
             $('#list-of-resources').append(`<button type="button" class="list-group-item"  onclick="getResourceDetails(${item.ResourceID})">${item.UserName}</button>`);
@@ -34,7 +34,7 @@ function getAll() {
 
 function createResource(): void {
 
-    $('#frmUser').empty();
+    //$('#frmUser').empty();
     let name: string = $('#user-name').val().toString();
     let surname: string = $('#user-surname').val().toString();
     let username: string = "";
@@ -54,7 +54,7 @@ function createResource(): void {
 
     $.ajax({
         type: "POST",
-        url: webApiUri + '/PostResource',
+        url: webApiUri + 'resources/PostResource',
         contentType: 'application/json',
         data: JSON.stringify({
             ResourceID: -1,
@@ -77,7 +77,7 @@ function createResource(): void {
 
 function getResourceDetails(resourceId: number) {
     $('#resource-detail').empty();
-    $.getJSON(webApiUri + '/GetResource/' + resourceId)
+    $.getJSON(webApiUri + 'resources/GetResource/' + resourceId)
         .done(function (data: Resource) {
             
             let isAvaible: string = data.IsAvaible ? "Si" : "No";
@@ -112,7 +112,7 @@ function deleteResource(resourceId: number) {
   
     $.ajax({
         type: "DELETE",
-        url: webApiUri + '/DeleteResource/' + resourceId,
+        url: webApiUri + 'resources/DeleteResource/' + resourceId,
         contentType: 'application/json'
     }).done(function (data) {
         $('#resource-detail').empty();

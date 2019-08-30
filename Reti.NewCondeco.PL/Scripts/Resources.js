@@ -4,7 +4,7 @@ $(document).ready(function () {
     _self.getAll();
 });
 //#endregion
-var webApiUri = 'https://localhost:44394/api/resources';
+//var webApiUri = 'https://localhost:44394/api/';
 var Resource = /** @class */ (function () {
     function Resource() {
     }
@@ -13,14 +13,14 @@ var Resource = /** @class */ (function () {
 var _self = this;
 function getAll() {
     $('#list-of-resources').empty();
-    $.getJSON(webApiUri + '/GetAll/').done(function (resource) {
+    $.getJSON(webApiUri + 'resources/GetAll/').done(function (resource) {
         $.each(resource, function (key, item) {
             $('#list-of-resources').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getResourceDetails(" + item.ResourceID + ")\">" + item.UserName + "</button>");
         });
     });
 }
 function createResource() {
-    $('#frmUser').empty();
+    //$('#frmUser').empty();
     var name = $('#user-name').val().toString();
     var surname = $('#user-surname').val().toString();
     var username = "";
@@ -39,7 +39,7 @@ function createResource() {
     }
     $.ajax({
         type: "POST",
-        url: webApiUri + '/PostResource',
+        url: webApiUri + 'resources/PostResource',
         contentType: 'application/json',
         data: JSON.stringify({
             ResourceID: -1,
@@ -60,7 +60,7 @@ function createResource() {
 }
 function getResourceDetails(resourceId) {
     $('#resource-detail').empty();
-    $.getJSON(webApiUri + '/GetResource/' + resourceId)
+    $.getJSON(webApiUri + 'resources/GetResource/' + resourceId)
         .done(function (data) {
         var isAvaible = data.IsAvaible ? "Si" : "No";
         $('#resource-detail').append("<label>DETTAGLIO RISORSA <a style=\"margin-left:5px;\" onclick=\"deleteResource(" + data.ResourceID + ")\">Delete</a></label>\n                    <div class=\"row\" id=\"username-detail\">\n                        <p class=\"col-md-6\">Username:</p>\n                        <p> " + data.UserName + " </p>\n                    </div>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"surname-detail\">\n                        <p class=\"col-md-6\">Cognome:</p>\n                        <p> " + data.SurName + " </p>\n                    </div>\n                    <div class=\"row\" id=\"mail-detail\">\n                        <p class=\"col-md-6\">Mail:</p>\n                        <p> " + data.Mail + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaible-detail\">\n                        <p class=\"col-md-6\">Disponibile:</p>\n                        <p> " + isAvaible + " </p>\n                    </div>");
@@ -72,7 +72,7 @@ function getResourceDetails(resourceId) {
 function deleteResource(resourceId) {
     $.ajax({
         type: "DELETE",
-        url: webApiUri + '/DeleteResource/' + resourceId,
+        url: webApiUri + 'resources/DeleteResource/' + resourceId,
         contentType: 'application/json'
     }).done(function (data) {
         $('#resource-detail').empty();

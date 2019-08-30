@@ -24,6 +24,7 @@
         <li role="presentation" id="booking-nav"><a href="#" onclick="activeNav(3)">Prenotazioni</a></li>
     </ul>
 
+    <!-- RESOURCES SECTION -->
     <section id="resources-section" class="container">
         <section id="createResource">
             <div class="row">
@@ -57,10 +58,84 @@
         </section>
     </section>
 
+    <!-- BUILDINGS SECTION -->
+
+    <section id="buildings-section" class="container">
+        <section id="createBuilding">
+            <div class="row">
+                <form id="frmBuilding" onsubmit="">
+
+                    <div class="form-group">
+                        <label for="building-name">Nome</label>
+                        <input type="text" class="form-control" id="building-name" name="building-name" placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="building-address">Indirizzo</label>
+                        <input type="text" class="form-control" id="building-address" name="building-address" placeholder="Via Giuseppe Garibaldi, 1, Busto Arsizio">
+                    </div>
+
+                    <button type="button" class="btn btn-default" onclick="createBuilding();">Create</button>
+                </form>
+            </div>
+
+        </section>
+        <section id="buildingDetail">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>LISTA EDIFICI</label>
+                    <div class="list-group" id="list-of-buildings"></div>
+                </div>
+                <div class="col-md-6" id="building-detail"></div>
+            </div>
+
+        </section>
+    </section>
+
+
+    <!-- ROOMS SECTION -->
+
+    <section id="rooms-section" class="container">
+        <section id="createRoom">
+            <div class="row">
+                <form id="frmRoom" onsubmit="">
+
+                    <div class="form-group">
+                        <label for="room-name">Nome</label>
+                        <input type="text" class="form-control" id="room-name" name="room-name" placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="room-avaiable-seats" class="input-number-label">Posti disponibili</label>
+                        <input type="number" class="form-control" id="room-avaiable-seats" name="room-avaiable-seats" value="1" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="room-building">Edificio</label>
+                        <select class="form-control" id="select-room-building" name="select-room-building"></select>
+                    </div>
+
+                    <button type="button" class="btn btn-default" onclick="createRoom();">Create</button>
+                </form>
+            </div>
+
+        </section>
+        <section id="roomDetail">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>LISTA STANZE</label>
+                    <div class="list-group" id="list-of-rooms"></div>
+                </div>
+                <div class="col-md-6" id="room-detail"></div>
+            </div>
+
+        </section>
+    </section>
+
+
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="Scripts/Rooms.js"></script>
     <script src="Scripts/Resources.js"></script>
     <script src="Scripts/Manager.js"></script>
+    <script src="Scripts/Buildings.js"></script>
+    <script src="Scripts/Booking.js"></script>
     <!--<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/popper.js/dist/js/popper.min.js"></script>-->
     <!--<script src="scripts/index.js"></script>-->
