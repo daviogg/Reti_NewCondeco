@@ -56,15 +56,15 @@ function getBuildingDetails (buildingId: number) {
             $('#building-detail').append(`<label>DETTAGLIO EDIFICIO <a style="margin-left:5px;" onclick="deleteBuilding(${data.BuildingId})">Delete</a></label>
                     <div class="row" id="name-detail">
                         <p class="col-md-6">Nome:</p>
-                        <p> ${data.Name} </p>
+                        <p class="col-md-6"> ${data.Name} </p>
                     </div>
                     <div class="row" id="address-detail">
                         <p class="col-md-6">Indirizzo:</p>
-                        <p> ${data.Address} </p>
+                        <p class="col-md-6"> ${data.Address} </p>
                     </div>
                     <div class="row" id="avaible-detail">
                         <p class="col-md-6">Disponibile:</p>
-                        <p> ${isAvaible} </p>
+                        <p class="col-md-6"> ${isAvaible} </p>
                     </div>`);
             return data
         })
@@ -72,6 +72,8 @@ function getBuildingDetails (buildingId: number) {
             alert('An error occurred while retrieving building details');
         });
 }
+
+
 function deleteBuilding(buildingId: number) {
 
     $.ajax({

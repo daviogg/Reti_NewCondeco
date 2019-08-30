@@ -57,15 +57,15 @@ function getRoomDetails(roomId: number) {
             $('#room-detail').append(`<label>DETTAGLIO AULA <a style="margin-left:5px;" onclick="deleteRoom(${data.RoomId})">Delete</a></label>
                     <div class="row" id="name-detail">
                         <p class="col-md-6">Nome:</p>
-                        <p> ${data.Name} </p>
+                        <p class="col-md-6"> ${data.Name} </p>
                     </div>
                     <div class="row" id="avaiable-seats-detail">
                         <p class="col-md-6">Posti disponibili:</p>
-                        <p> ${data.AvaiableSeats} </p>
+                        <p class="col-md-6"> ${data.AvaiableSeats} </p>
                     </div>
                     <div class="row" id="avaible-detail">
                         <p class="col-md-6">Disponibile:</p>
-                        <p> ${isAvaible} </p>
+                        <p class="col-md-6"> ${isAvaible} </p>
                     </div>`);
         })
         .fail(function (jqXHR, textStatus, err) {

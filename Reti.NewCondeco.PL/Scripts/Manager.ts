@@ -29,7 +29,7 @@ function activeNav(type: ElementType) {
             hideAllSections();
             $("#rooms-nav").addClass("Active");
             $("#rooms-section").show();
-            //_self.getAllBuildings();
+            _self.getAllBuildings();
             _self.getAllRooms();
             break;
         case ElementType.edifici:

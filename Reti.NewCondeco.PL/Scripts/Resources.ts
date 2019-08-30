@@ -85,23 +85,23 @@ function getResourceDetails(resourceId: number) {
             $('#resource-detail').append(`<label>DETTAGLIO RISORSA <a style="margin-left:5px;" onclick="deleteResource(${data.ResourceID})">Delete</a></label>
                     <div class="row" id="username-detail">
                         <p class="col-md-6">Username:</p>
-                        <p> ${data.UserName} </p>
+                        <p class="col-md-6"> ${data.UserName} </p>
                     </div>
                     <div class="row" id="name-detail">
                         <p class="col-md-6">Nome:</p>
-                        <p> ${data.Name} </p>
+                        <p class="col-md-6"> ${data.Name} </p>
                     </div>
                     <div class="row" id="surname-detail">
                         <p class="col-md-6">Cognome:</p>
-                        <p> ${data.SurName} </p>
+                        <p class="col-md-6"> ${data.SurName} </p>
                     </div>
                     <div class="row" id="mail-detail">
                         <p class="col-md-6">Mail:</p>
-                        <p> ${data.Mail} </p>
+                        <p class="col-md-6"> ${data.Mail} </p>
                     </div>
                     <div class="row" id="avaible-detail">
                         <p class="col-md-6">Disponibile:</p>
-                        <p> ${isAvaible} </p>
+                        <p class="col-md-6"> ${isAvaible} </p>
                     </div>`);
         })
         .fail(function (jqXHR, textStatus, err) {
