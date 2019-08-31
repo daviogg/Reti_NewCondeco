@@ -16,7 +16,6 @@ function getAllBuildings() {
 function createBuilding() {
     var name = $('#building-name').val().toString();
     var address = $('#building-address').val().toString();
-    $('#frmBuilding').empty();
     $.ajax({
         type: "POST",
         url: webApiUri + 'buildings/PostBuilding',

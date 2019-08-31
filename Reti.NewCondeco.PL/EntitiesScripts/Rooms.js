@@ -16,7 +16,6 @@ function createRoom() {
     var name = $('#room-name').val().toString();
     var avaiableSeats = $('#room-avaiable-seats').val();
     var buildingId = $('#select-room-building').val();
-    $('#frmRoom').empty();
     $.ajax({
         type: "POST",
         url: webApiUri + 'rooms/PostRoom',

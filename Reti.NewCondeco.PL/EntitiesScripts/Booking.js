@@ -3,10 +3,12 @@ var Booking = /** @class */ (function () {
     }
     return Booking;
 }());
+var bookingArray = [];
 function getAllBookings() {
-    $('#list-of-bookings').empty();
+    $('#list-of-booking').empty();
     $('#select-room-booking').empty();
     $.getJSON(webApiUri + 'booking/GetAll/').done(function (booking) {
+        bookingArray = booking;
         $.each(booking, function (key, item) {
             $('#list-of-booking').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getBookingDetails(" + item.BookingId + ")\">" + item.Description + "</button>");
         });
@@ -18,7 +20,6 @@ function createBooking() {
     var roomId = $('#select-room-booking').val();
     var startDate = $('#start-booking-date').data('date');
     var endDate = $('#end-booking-date').data('date');
-    $('#frmBooking').empty();
     $.ajax({
         type: "POST",
         url: webApiUri + 'booking/PostBooking',
@@ -62,4 +63,10 @@ function deleteBooking(bookingId) {
         alert("An error has occurred while deleting booking");
     });
 }
+//function filter() {
+//    var input, filter, ul, li, a, i, txtValue;
+//    input = $("#filterList").val();
+//    filter = input.value.toUpperCase();
+//    $.each(bookingArray)
+//}
 //# sourceMappingURL=Booking.js.map

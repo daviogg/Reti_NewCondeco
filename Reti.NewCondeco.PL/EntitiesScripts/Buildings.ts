@@ -26,7 +26,6 @@ function createBuilding(): void {
     let name: string = $('#building-name').val().toString();
     let address: string = $('#building-address').val().toString();
 
-    $('#frmBuilding').empty();
 
     $.ajax({
         type: "POST",

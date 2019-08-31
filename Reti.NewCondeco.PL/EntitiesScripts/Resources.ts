@@ -40,8 +40,6 @@ function createResource(): void {
     let surname: string = $('#user-surname').val().toString();
     let username: string = "";
 
-    $('#frmUser').empty();
-
     if (surname.length >= 4) {
         username = surname.substr(0, 4);
         if (name.length >= 2)

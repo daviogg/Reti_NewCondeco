@@ -24,7 +24,6 @@ function createResource() {
     var name = $('#user-name').val().toString();
     var surname = $('#user-surname').val().toString();
     var username = "";
-    $('#frmUser').empty();
     if (surname.length >= 4) {
         username = surname.substr(0, 4);
         if (name.length >= 2)
