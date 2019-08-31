@@ -12,7 +12,6 @@ namespace Reti.NewCondeco.BL
     public class ResourcesManager
     {
     
-        //TODO: Define return type
         public void UpdateResource(Resource resource)
         {
             try
@@ -20,7 +19,7 @@ namespace Reti.NewCondeco.BL
                 ResourceRepository resourceRepo = new ResourceRepository();
 
                 var repo = resourceRepo.Get(resource.ResourceID);
-                //TODO: Separate Add and Update logics
+                
                 if (repo == null)
                 {
                     resourceRepo.Add(resource);

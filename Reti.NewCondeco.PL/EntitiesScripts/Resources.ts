@@ -28,7 +28,7 @@ function getAll() {
     $.getJSON(webApiUri + 'resources/GetAll/').done(resource => {
 
         $.each(resource, (key, item: Resource) => {
-            $('#list-of-resources').append(`<button type="button" class="list-group-item"  onclick="getResourceDetails(${item.ResourceID})">${item.UserName}</button>`);
+            $('#list-of-resources').append(`<button type="button" class="list-group-item"  onclick="getResourceDetails(${item.ResourceID})">${item.UserName} - Id: ${item.ResourceID}</button>`);
             if (item.IsAvaible)
                 $('#select-resource-booking').append(`<option value="${item.ResourceID}">${item.UserName} - Id: ${item.ResourceID}</option>`);
         });

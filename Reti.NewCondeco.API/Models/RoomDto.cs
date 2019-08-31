@@ -12,5 +12,6 @@ namespace Reti.NewCondeco.API.Models
         public int AvaiableSeats { get; set; }
         public int RoomBuildingId { get; set; }
         public bool IsAvaible { get; set; }
+        public string OriginalAvaibleSeats { get; set; }
     }
 }

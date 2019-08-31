@@ -5,6 +5,7 @@ class Room {
     AvaiableSeats: number;
     RoomBuildingId : number;
     IsAvaible: true;
+    OriginalAvaibleSeats: number;
 }
 
 
@@ -16,7 +17,7 @@ function getAllRooms() {
 
     $.getJSON(webApiUri + 'rooms/GetAll/').done(room => {
         $.each(room, (key, item: Room) => {
-            $('#list-of-rooms').append(`<button type="button" class="list-group-item"  onclick="getRoomDetails(${item.RoomId})">${item.Name}</button>`);
+            $('#list-of-rooms').append(`<button type="button" class="list-group-item"  onclick="getRoomDetails(${item.RoomId})">${item.Name} - Id: ${item.RoomId}</button>`);
             if (item.IsAvaible)
                 $('#select-room-booking').append(`<option value="${item.RoomId}">${item.Name} IdStanza: ${item.RoomId}</option>`);
         });
@@ -39,7 +40,8 @@ function createRoom(): void {
             Name: name,
             AvaiableSeats: avaiableSeats,
             RoomBuildingId: buildingId,
-            IsAvaible: true
+            IsAvaible: true,
+            OriginalAvaibleSeats: avaiableSeats
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));

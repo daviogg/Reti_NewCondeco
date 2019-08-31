@@ -73,7 +73,6 @@ namespace Reti.NewCondeco.BL
                 ResourcesManager resourceMng = new ResourcesManager();
                 List<Booking> bl = new List<Booking>();
                 bl = bookingRepo.GetAll().ToList();
-                //(startDate <= b.DateEnd && startDate >= b.DateStart || b.DateStart <= endDate && b.DateStart >= startDate)
                 bl.ForEach(b =>
                 {
                     if (Utils.IsCurrentBooking(startDate, endDate, b.DateStart, b.DateEnd))

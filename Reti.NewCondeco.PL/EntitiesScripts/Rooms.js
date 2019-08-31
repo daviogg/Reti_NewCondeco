@@ -8,7 +8,7 @@ function getAllRooms() {
     $('#select-room-booking').empty();
     $.getJSON(webApiUri + 'rooms/GetAll/').done(function (room) {
         $.each(room, function (key, item) {
-            $('#list-of-rooms').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getRoomDetails(" + item.RoomId + ")\">" + item.Name + "</button>");
+            $('#list-of-rooms').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getRoomDetails(" + item.RoomId + ")\">" + item.Name + " - Id: " + item.RoomId + "</button>");
             if (item.IsAvaible)
                 $('#select-room-booking').append("<option value=\"" + item.RoomId + "\">" + item.Name + " IdStanza: " + item.RoomId + "</option>");
         });
@@ -27,7 +27,8 @@ function createRoom() {
             Name: name,
             AvaiableSeats: avaiableSeats,
             RoomBuildingId: buildingId,
-            IsAvaible: true
+            IsAvaible: true,
+            OriginalAvaibleSeats: avaiableSeats
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
