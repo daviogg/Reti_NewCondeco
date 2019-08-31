@@ -24,6 +24,5 @@ GO
 GO
 ALTER TABLE [dbo].[Rooms] ADD  DEFAULT ((1)) FOR [IsAvaible]
 GO
-ALTER TABLE [dbo].[Rooms] ADD  DEFAULT ((1)) FOR [IsAvaible]
-GO
+
 ALTER TABLE [dbo].[Rooms] ADD  CONSTRAINT [DF_Rooms_OriginalAvaibleSeats]  DEFAULT ((0)) FOR [OriginalAvaibleSeats]
