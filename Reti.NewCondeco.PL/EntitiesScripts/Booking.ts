@@ -56,7 +56,7 @@ function getBookingDetails(bookingId: number) {
     $.getJSON(webApiUri + 'booking/GetBooking/' + bookingId)
         .done(function (data: Booking) {
 
-            $('#booking-detail').append(`<label>DETTAGLIO PRENOTAZIONE </label>
+            $('#booking-detail').append(`<label>DETTAGLIO PRENOTAZIONE <a style="margin-left:5px;" onclick="deleteBooking(${data.BookingId})">Delete</a> </label>
                     <div class="row" id="description-detail">
                         <p class="col-md-6">Descrizione:</p>
                         <p class="col-md-6"> ${data.Description} </p>

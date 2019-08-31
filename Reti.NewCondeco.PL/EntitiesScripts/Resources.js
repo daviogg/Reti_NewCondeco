@@ -45,7 +45,7 @@ function createResource() {
         contentType: 'application/json',
         data: JSON.stringify({
             ResourceID: -1,
-            UserName: username,
+            UserName: username.toLowerCase(),
             SurName: $('#user-surname').val(),
             Name: $('#user-name').val(),
             Mail: $('#email').val(),
@@ -54,7 +54,8 @@ function createResource() {
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
-        $('#frmUser').append("<label>Utente Creato! Username : " + username + "</label>");
+        $('#resource-created').empty();
+        $('#resource-created').append("<label id=\"resource-created\">Risorsa Creata! Nome : " + name + " Cognome: " + surname + "</label>");
         _self.getAll();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error has occurred while creating resource");
@@ -65,7 +66,7 @@ function getResourceDetails(resourceId) {
     $.getJSON(webApiUri + 'resources/GetResource/' + resourceId)
         .done(function (data) {
         var isAvaible = data.IsAvaible ? "Si" : "No";
-        $('#resource-detail').append("<label>DETTAGLIO RISORSA <a style=\"margin-left:5px;\" onclick=\"deleteResource(" + data.ResourceID + ")\">Delete</a></label>\n                    <div class=\"row\" id=\"username-detail\">\n                        <p class=\"col-md-6\">Username:</p>\n                        <p class=\"col-md-6\"> " + data.UserName + " </p>\n                    </div>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p class=\"col-md-6\"> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"surname-detail\">\n                        <p class=\"col-md-6\">Cognome:</p>\n                        <p class=\"col-md-6\"> " + data.SurName + " </p>\n                    </div>\n                    <div class=\"row\" id=\"mail-detail\">\n                        <p class=\"col-md-6\">Mail:</p>\n                        <p class=\"col-md-6\"> " + data.Mail + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaible-detail\">\n                        <p class=\"col-md-6\">Disponibile:</p>\n                        <p class=\"col-md-6\"> " + isAvaible + " </p>\n                    </div>");
+        $('#resource-detail').append("<label>DETTAGLIO RISORSA </label>\n                    <div class=\"row\" id=\"username-detail\">\n                        <p class=\"col-md-6\">Username:</p>\n                        <p class=\"col-md-6\"> " + data.UserName + " </p>\n                    </div>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p class=\"col-md-6\"> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"surname-detail\">\n                        <p class=\"col-md-6\">Cognome:</p>\n                        <p class=\"col-md-6\"> " + data.SurName + " </p>\n                    </div>\n                    <div class=\"row\" id=\"mail-detail\">\n                        <p class=\"col-md-6\">Mail:</p>\n                        <p class=\"col-md-6\"> " + data.Mail + " </p>\n                    </div>\n                    ");
     })
         .fail(function (jqXHR, textStatus, err) {
         alert('An error occurred while retrieving Resource details');

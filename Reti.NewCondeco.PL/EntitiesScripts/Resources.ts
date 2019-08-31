@@ -55,14 +55,13 @@ function createResource(): void {
         else
             username = name + surname.substr(0, 4);
     }
-
     $.ajax({
         type: "POST",
         url: webApiUri + 'resources/PostResource',
         contentType: 'application/json',
         data: JSON.stringify({
             ResourceID: -1,
-            UserName: username,
+            UserName: username.toLowerCase(),
             SurName: $('#user-surname').val(),
             Name: $('#user-name').val(),
             Mail: $('#email').val(),
@@ -71,7 +70,8 @@ function createResource(): void {
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
-        $('#frmUser').append(`<label>Utente Creato! Username : ${username}</label>`);
+        $('#resource-created').empty();
+        $('#resource-created').append(`<label id="resource-created">Risorsa Creata! Nome : ${name} Cognome: ${surname}</label>`);
         _self.getAll();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error has occurred while creating resource");
@@ -86,7 +86,7 @@ function getResourceDetails(resourceId: number) {
             
             let isAvaible: string = data.IsAvaible ? "Si" : "No";
 
-            $('#resource-detail').append(`<label>DETTAGLIO RISORSA <a style="margin-left:5px;" onclick="deleteResource(${data.ResourceID})">Delete</a></label>
+            $('#resource-detail').append(`<label>DETTAGLIO RISORSA </label>
                     <div class="row" id="username-detail">
                         <p class="col-md-6">Username:</p>
                         <p class="col-md-6"> ${data.UserName} </p>
@@ -103,10 +103,7 @@ function getResourceDetails(resourceId: number) {
                         <p class="col-md-6">Mail:</p>
                         <p class="col-md-6"> ${data.Mail} </p>
                     </div>
-                    <div class="row" id="avaible-detail">
-                        <p class="col-md-6">Disponibile:</p>
-                        <p class="col-md-6"> ${isAvaible} </p>
-                    </div>`);
+                    `);
         })
         .fail(function (jqXHR, textStatus, err) {
             alert('An error occurred while retrieving Resource details');

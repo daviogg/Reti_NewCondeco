@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Reti.NewCondeco.Repositories;
+using System.Text.RegularExpressions;
 
 namespace Reti.NewCondeco.BL
 {
@@ -58,20 +59,27 @@ namespace Reti.NewCondeco.BL
             ResourceRepository resourceRepo = new ResourceRepository();
             try
             {
-                var max = 1;
-
+                var max = -1;
                 List<Resource> rl = resourceRepo.GetAll().ToList();
+
+                
+
                 rl.ForEach(r =>
                 {
-                    if(resource.UserName == r.UserName)
+
+                    var number = Regex.Replace(r.UserName, "[^0-9]", ""); ;
+                    var usrName = Regex.Replace(r.UserName, "[^a-zA-Z]", "");
+
+                    if (resource.UserName == usrName)
                     {
-                        var intUsername = Int32.Parse(r.UserName.Substring(r.UserName.Length - 1, 1));
+                        var intUsername = Int32.Parse(number);
                         if (max < intUsername)
                             max = intUsername;
                     }
                 });
 
-                resource.UserName += (max+1);
+                
+                resource.UserName += max+1;
                 resource.ResourceID = resourceRepo.GetMaxId() + 1;
 
                 resourceRepo.Add(resource);
