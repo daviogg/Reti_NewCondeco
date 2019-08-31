@@ -66,8 +66,6 @@ function deleteBooking(bookingId) {
 function checkAvaible() {
     var startDate = $('#start-booking-date').data('date');
     var endDate = $('#end-booking-date').data('date');
-    //let startDateISO: string = new Date(startDate).toISOString().replace(/:/g, "_");
-    //let endDateISO: string = new Date(endDate).toISOString().replace(/:/g, "_");
     $("#end-booking-section").show();
     $.ajax({
         type: "POST",

@@ -58,7 +58,22 @@ namespace Reti.NewCondeco.BL
             ResourceRepository resourceRepo = new ResourceRepository();
             try
             {
+                var max = 1;
+
+                List<Resource> rl = resourceRepo.GetAll().ToList();
+                rl.ForEach(r =>
+                {
+                    if(resource.UserName == r.UserName)
+                    {
+                        var intUsername = Int32.Parse(r.UserName.Substring(r.UserName.Length - 1, 1));
+                        if (max < intUsername)
+                            max = intUsername;
+                    }
+                });
+
+                resource.UserName += (max+1);
                 resource.ResourceID = resourceRepo.GetMaxId() + 1;
+
                 resourceRepo.Add(resource);
                 GlobalUnitOfWork.Commit();
             }

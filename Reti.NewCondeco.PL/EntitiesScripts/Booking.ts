@@ -14,9 +14,6 @@ let bookingArray: Array<Booking> = [];
 function getAllBookings() {
     $('#list-of-booking').empty();
     $('#select-room-booking').empty();
-
-    
-
     $.getJSON(webApiUri + 'booking/GetAll/').done(booking => {
         bookingArray = booking;
         $.each(booking, (key, item: Booking) => {
@@ -106,9 +103,6 @@ function deleteBooking(bookingId: number) {
 function checkAvaible() {
     let startDate: Date = $('#start-booking-date').data('date');
     let endDate: Date = $('#end-booking-date').data('date');
-
-    //let startDateISO: string = new Date(startDate).toISOString().replace(/:/g, "_");
-    //let endDateISO: string = new Date(endDate).toISOString().replace(/:/g, "_");
 
     $("#end-booking-section").show();
     $.ajax({
