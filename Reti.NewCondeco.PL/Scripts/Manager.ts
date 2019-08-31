@@ -43,6 +43,9 @@ function activeNav(type: ElementType) {
             resetNavActiveClass();
             hideAllSections() 
             $("#booking-nav").addClass("Active");
+            $("#booking-section").show();
+            _self.getAll();
+            _self.getAllRooms();
             break;
         default:
     }
@@ -59,6 +62,7 @@ function hideAllSections() {
     $("#resources-section").hide();
     $("#buildings-section").hide();
     $("#rooms-section").hide();
+    $("#booking-section").hide();
 }
 
 

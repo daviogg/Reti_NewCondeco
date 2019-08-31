@@ -1,5 +1,11 @@
 ﻿<html lang="en">
 <head>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/moment.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +19,10 @@
     <!-- Custom styles for this template -->
     <!--<link href="css/jumbotron.css" rel="stylesheet">-->
     <link href="css/NewCondeco.css" rel="stylesheet" />
+
+
+
+
 </head>
 
 <body>
@@ -129,8 +139,81 @@
         </section>
     </section>
 
+    <!-- BOOKING SECTION -->
+    <section id="booking-section" class="container">
+        <section id="createBooking">
+            <div class="row">
+                <form id="frmBooking" onsubmit="">
+                    <div class="form-group">
+                        <label for="booking-description">Descrizione</label>
+                        <input type="text" class="form-control" id="booking-description" name="booking-description" placeholder="Descrizione">
+                    </div>
+                    <div class="form-group">
+                        <label for="select-resource-booking">Risorsa</label>
+                        <select class="form-control" id="select-resource-booking" name="select-resource-booking"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select-room-booking">Stanza</label>
+                        <select class="form-control" id="select-room-booking" name="select-room-booking"></select>
+                    </div>
+                    <!-- DATA INIZIO -->
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-sm-6'>
+                                <div class="form-group">
+                                    <div class='input-group date' id='start-booking-date'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#start-booking-date').datetimepicker();
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <!-- DATA FINE -->
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-sm-6'>
+                                <div class="form-group">
+                                    <div class='input-group date' id='end-booking-date'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#end-booking-date').datetimepicker();
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default" onclick="createBooking();">Create</button>
+                </form>
+            </div>
 
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        </section>
+        <section id="roomDetail">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>LISTA STANZE</label>
+                    <div class="list-group" id="list-of-rooms"></div>
+                </div>
+                <div class="col-md-6" id="room-detail"></div>
+            </div>
+
+        </section>
+    </section>
+
+    <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>-->
     <script src="Scripts/Rooms.js"></script>
     <script src="Scripts/Resources.js"></script>
     <script src="Scripts/Manager.js"></script>
