@@ -63,10 +63,42 @@ function deleteBooking(bookingId) {
         alert("An error has occurred while deleting booking");
     });
 }
-//function filter() {
-//    var input, filter, ul, li, a, i, txtValue;
-//    input = $("#filterList").val();
-//    filter = input.value.toUpperCase();
-//    $.each(bookingArray)
-//}
+function checkAvaible() {
+    var startDate = $('#start-booking-date').data('date');
+    var endDate = $('#end-booking-date').data('date');
+    //let startDateISO: string = new Date(startDate).toISOString().replace(/:/g, "_");
+    //let endDateISO: string = new Date(endDate).toISOString().replace(/:/g, "_");
+    $("#end-booking-section").show();
+    $.ajax({
+        type: "POST",
+        url: webApiUri + "booking/CheckAvaibleRooms",
+        contentType: 'application/json',
+        data: JSON.stringify({
+            DateStart: startDate,
+            DateEnd: endDate
+        })
+    }).done(function (data) {
+        _self.getAllRooms();
+    });
+    $("#end-booking-section").show();
+    $.ajax({
+        type: "POST",
+        url: webApiUri + "booking/CheckAvaibleResources",
+        contentType: 'application/json',
+        data: JSON.stringify({
+            DateStart: startDate,
+            DateEnd: endDate
+        })
+    }).done(function (data) {
+        _self.getAll();
+    });
+}
+function filter() {
+    var searchKey = $("#filterList").val().toString().toLowerCase();
+    $('#list-of-booking').empty();
+    var ba = bookingArray.filter(function (b) { return b.Description.toLowerCase().indexOf(searchKey) >= 0 || b.BookingId.toString().indexOf(searchKey) >= 0; });
+    ba.forEach(function (b) {
+        $('#list-of-booking').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getBookingDetails(" + b.BookingId + ")\">" + b.Description + " - Id: " + b.BookingId + "</button>");
+    });
+}
 //# sourceMappingURL=Booking.js.map

@@ -148,14 +148,6 @@
                         <label for="booking-description">Descrizione</label>
                         <input type="text" class="form-control" id="booking-description" name="booking-description" placeholder="Descrizione">
                     </div>
-                    <div class="form-group">
-                        <label for="select-resource-booking">Risorsa</label>
-                        <select class="form-control" id="select-resource-booking" name="select-resource-booking"></select>
-                    </div>
-                    <div class="form-group">
-                        <label for="select-room-booking">Stanza</label>
-                        <select class="form-control" id="select-room-booking" name="select-room-booking"></select>
-                    </div>
                     <!-- DATA INIZIO -->
                     <div class="container">
                         <div class="row">
@@ -196,7 +188,18 @@
                             </script>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-default" onclick="createBooking();">Create</button>
+                    <button type="button" class="btn btn-default" onclick="checkAvaible();">Controlla disponibilità</button>
+                    <section id="end-booking-section">
+                        <div class="form-group">
+                            <label for="select-resource-booking">Risorsa</label>
+                            <select class="form-control" id="select-resource-booking" name="select-resource-booking"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select-room-booking">Stanza</label>
+                            <select class="form-control" id="select-room-booking" name="select-room-booking"></select>
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="createBooking();">Prenota</button>
+                    </section>
                 </form>
             </div>
 

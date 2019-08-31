@@ -15,7 +15,8 @@ function getAllRooms() {
     $.getJSON(webApiUri + 'rooms/GetAll/').done(room => {
         $.each(room, (key, item: Room) => {
             $('#list-of-rooms').append(`<button type="button" class="list-group-item"  onclick="getRoomDetails(${item.RoomId})">${item.Name}</button>`);
-            $('#select-room-booking').append(`<option value="${item.RoomId}">${item.Name}</option>`);
+            if (item.IsAvaible)
+             $('#select-room-booking').append(`<option value="${item.RoomId}">${item.Name}</option>`);
         });
     });
 }

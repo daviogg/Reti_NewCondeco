@@ -43,11 +43,12 @@ function activeNav(type) {
             hideAllSections();
             $("#booking-nav").addClass("Active");
             $("#booking-section").show();
+            $("#end-booking-section").hide();
             $('#select-room-booking').empty();
             $('#select-resource-booking').empty();
             _self.getAllBookings();
             _self.getAll();
-            _self.getAllRooms();
+            //_self.getAllRooms();
             break;
         default:
     }

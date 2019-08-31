@@ -36,6 +36,26 @@ namespace Reti.NewCondeco.API.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("CheckAvaibleRooms")]
+        public IHttpActionResult GetAvaibleRooms([FromBody]DatesDto dates) {
+            BookingManager bm = new BookingManager();
+            bm.CheckAvaibleRooms(dates.DateStart, dates.DateEnd);
+            return Ok();
+
+        }
+
+
+        [HttpPost]
+        [Route("CheckAvaibleResources")]
+        public IHttpActionResult GetAvaibleResources([FromBody]DatesDto dates)
+        {
+            BookingManager bm = new BookingManager();
+            bm.CheckAvaibleResources(dates.DateStart, dates.DateEnd);
+            return Ok();
+
+        }
+
         [HttpGet]
         [Route("GetAll")]
         public IHttpActionResult GetAllBooking()

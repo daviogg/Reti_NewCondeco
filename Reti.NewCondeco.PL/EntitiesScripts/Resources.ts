@@ -23,11 +23,14 @@ let _self = this;
 
 function getAll() {
     $('#list-of-resources').empty();
+    $('#select-resource-booking').empty();
+
     $.getJSON(webApiUri + 'resources/GetAll/').done(resource => {
 
         $.each(resource, (key, item: Resource) => {
             $('#list-of-resources').append(`<button type="button" class="list-group-item"  onclick="getResourceDetails(${item.ResourceID})">${item.UserName}</button>`);
-            $('#select-resource-booking').append(`<option value="${item.ResourceID}">${item.Name} ${item.SurName}</option>`);
+            if (item.IsAvaible)
+                $('#select-resource-booking').append(`<option value="${item.ResourceID}">${item.Name} ${item.SurName}</option>`);
         });
 
     });

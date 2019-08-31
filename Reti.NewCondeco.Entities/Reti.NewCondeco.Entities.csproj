@@ -73,6 +73,7 @@
     <Compile Include="Room.cs">
       <DependentUpon>NewCondeco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

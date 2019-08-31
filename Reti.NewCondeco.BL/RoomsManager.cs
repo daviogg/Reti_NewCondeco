@@ -57,6 +57,23 @@ namespace Reti.NewCondeco.BL
             return rooms;
         }
 
+        public void UpdateAvaible(int roomId, bool isAvaible)
+        {
+            
+            try
+            {
+                RoomRepository roomRepo = new RoomRepository();
+                var room = GetRoomById(roomId);
+                room.IsAvaible = isAvaible;
+                roomRepo.Update(room);
+                GlobalUnitOfWork.Commit();
+
+            }catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void DeleteRoom(int RoomID)
         {
             try

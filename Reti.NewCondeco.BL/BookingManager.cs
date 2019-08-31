@@ -1,7 +1,9 @@
-﻿using Reti.NewCondeco.Repositories;
+﻿using Reti.NewCondeco.Entities.Utils;
+using Reti.NewCondeco.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +26,45 @@ namespace Reti.NewCondeco.BL
 
             return result;
         }
+
+        public void CheckAvaibleRooms(DateTime startDate, DateTime endDate)
+        {
+            BookingRepository bookingRepo = new BookingRepository();
+            RoomsManager roomMng = new RoomsManager();
+            List<Booking> bl = new List<Booking>();
+            bl = bookingRepo.GetAll().ToList();
+            //(startDate <= b.DateEnd && startDate >= b.DateStart || b.DateStart <= endDate && b.DateStart >= startDate)
+            bl.ForEach(b => {
+                if (Utils.IsCurrentBooking(startDate, endDate, b.DateStart, b.DateEnd))
+                {
+                    roomMng.UpdateAvaible(b.BRoomId, false);
+                }
+                else
+                {
+                    roomMng.UpdateAvaible(b.BRoomId, true);
+                }
+            });
+        }
+
+        public void CheckAvaibleResources(DateTime startDate, DateTime endDate)
+        {
+            BookingRepository bookingRepo = new BookingRepository();
+            ResourcesManager resourceMng = new ResourcesManager();
+            List<Booking> bl = new List<Booking>();
+            bl = bookingRepo.GetAll().ToList();
+            //(startDate <= b.DateEnd && startDate >= b.DateStart || b.DateStart <= endDate && b.DateStart >= startDate)
+            bl.ForEach(b => {
+                if (Utils.IsCurrentBooking(startDate, endDate, b.DateStart, b.DateEnd))
+                {
+                    resourceMng.UpdateAvaibleResource(b.BResourceId, false);
+                }
+                else
+                {
+                    resourceMng.UpdateAvaibleResource(b.BResourceId, true);
+                }
+            });
+        }
+
 
 
         public void CreateBooking(Booking Booking)
@@ -72,4 +113,5 @@ namespace Reti.NewCondeco.BL
             }
         }
     }
+
 }

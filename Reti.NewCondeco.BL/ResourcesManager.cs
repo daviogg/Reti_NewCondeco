@@ -69,6 +69,24 @@ namespace Reti.NewCondeco.BL
             }
         }
 
+        public void UpdateAvaibleResource(int roomId, bool isAvaible)
+        {
+
+            try
+            {
+                ResourceRepository resourceRepo = new ResourceRepository();
+                var resource = GetResourceById(roomId);
+                resource.IsAvaible = isAvaible;
+                resourceRepo.Update(resource);
+                GlobalUnitOfWork.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public IEnumerable<Resource> ReturnAllResources()
         {
             IEnumerable<Resource> resources;

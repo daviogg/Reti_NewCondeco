@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Models\BookingDto.cs" />
     <Compile Include="Models\BuildingDto.cs" />
+    <Compile Include="Models\DatesDto.cs" />
     <Compile Include="Models\ResourceDto.cs" />
     <Compile Include="Models\RoomDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
