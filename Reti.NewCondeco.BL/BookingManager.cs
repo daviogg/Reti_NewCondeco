@@ -29,40 +29,67 @@ namespace Reti.NewCondeco.BL
 
         public void CheckAvaibleRooms(DateTime startDate, DateTime endDate)
         {
-            BookingRepository bookingRepo = new BookingRepository();
-            RoomsManager roomMng = new RoomsManager();
-            List<Booking> bl = new List<Booking>();
-            bl = bookingRepo.GetAll().ToList();
-            //(startDate <= b.DateEnd && startDate >= b.DateStart || b.DateStart <= endDate && b.DateStart >= startDate)
-            bl.ForEach(b => {
-                if (Utils.IsCurrentBooking(startDate, endDate, b.DateStart, b.DateEnd))
+            try
+            {
+                BookingRepository bookingRepo = new BookingRepository();
+                ResourcesManager resourceManager = new ResourcesManager();
+                RoomRepository roomRepo = new RoomRepository();
+                RoomsManager roomMng = new RoomsManager();
+
+                List<Booking> bl = new List<Booking>();
+                HashSet<int> roomIds = new HashSet<int>();
+
+                bl = bookingRepo.GetAll().ToList();
+               
+
+                bl.ForEach(b =>
                 {
-                    roomMng.UpdateAvaible(b.BRoomId, false);
-                }
-                else
+                    if (Utils.IsCurrentBooking(startDate, endDate, b.DateStart, b.DateEnd))
+                    {
+                        roomMng.UpdateAvaible(b.BRoomId, -1);
+                        roomIds.Add(b.BRoomId);
+                    }
+                    else
+                        roomMng.UpdateAvaible(b.BRoomId, 0);
+                });
+
+                foreach (var id in roomIds)
                 {
-                    roomMng.UpdateAvaible(b.BRoomId, true);
+                    roomMng.UpdateResetAvaibleSeats(id);
                 }
-            });
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void CheckAvaibleResources(DateTime startDate, DateTime endDate)
         {
-            BookingRepository bookingRepo = new BookingRepository();
-            ResourcesManager resourceMng = new ResourcesManager();
-            List<Booking> bl = new List<Booking>();
-            bl = bookingRepo.GetAll().ToList();
-            //(startDate <= b.DateEnd && startDate >= b.DateStart || b.DateStart <= endDate && b.DateStart >= startDate)
-            bl.ForEach(b => {
-                if (Utils.IsCurrentBooking(startDate, endDate, b.DateStart, b.DateEnd))
+            try
+            {
+                BookingRepository bookingRepo = new BookingRepository();
+                ResourcesManager resourceMng = new ResourcesManager();
+                List<Booking> bl = new List<Booking>();
+                bl = bookingRepo.GetAll().ToList();
+                //(startDate <= b.DateEnd && startDate >= b.DateStart || b.DateStart <= endDate && b.DateStart >= startDate)
+                bl.ForEach(b =>
                 {
-                    resourceMng.UpdateAvaibleResource(b.BResourceId, false);
-                }
-                else
-                {
-                    resourceMng.UpdateAvaibleResource(b.BResourceId, true);
-                }
-            });
+                    if (Utils.IsCurrentBooking(startDate, endDate, b.DateStart, b.DateEnd))
+                    {
+                        resourceMng.UpdateAvaibleResource(b.BResourceId, false);
+                    }
+                    else
+                    {
+                        resourceMng.UpdateAvaibleResource(b.BResourceId, true);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 

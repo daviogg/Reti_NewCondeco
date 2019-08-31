@@ -5,11 +5,12 @@ var Room = /** @class */ (function () {
 }());
 function getAllRooms() {
     $('#list-of-rooms').empty();
+    $('#select-room-booking').empty();
     $.getJSON(webApiUri + 'rooms/GetAll/').done(function (room) {
         $.each(room, function (key, item) {
             $('#list-of-rooms').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getRoomDetails(" + item.RoomId + ")\">" + item.Name + "</button>");
             if (item.IsAvaible)
-                $('#select-room-booking').append("<option value=\"" + item.RoomId + "\">" + item.Name + "</option>");
+                $('#select-room-booking').append("<option value=\"" + item.RoomId + "\">" + item.Name + " IdStanza: " + item.RoomId + "</option>");
         });
     });
 }
@@ -30,7 +31,8 @@ function createRoom() {
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
-        $('#frmRoom').append("<label>Aula Creata! Nome : " + name + ", Posti disponibili: " + avaiableSeats + "</label>");
+        $('#room-created').empty();
+        $('#room-created').append("<label>Aula Creata! Nome : " + name + ", Posti disponibili: " + avaiableSeats + "</label>");
         _self.getAllRooms();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error has occurred while creating room");
@@ -41,7 +43,7 @@ function getRoomDetails(roomId) {
     $.getJSON(webApiUri + 'rooms/GetRoom/' + roomId)
         .done(function (data) {
         var isAvaible = data.IsAvaible ? "Si" : "No";
-        $('#room-detail').append("<label>DETTAGLIO AULA </label>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p class=\"col-md-6\"> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaiable-seats-detail\">\n                        <p class=\"col-md-6\">Posti disponibili:</p>\n                        <p class=\"col-md-6\"> " + data.AvaiableSeats + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaible-detail\">\n                        <p class=\"col-md-6\">Disponibile:</p>\n                        <p class=\"col-md-6\"> " + isAvaible + " </p>\n                    </div>");
+        $('#room-detail').append("<label>DETTAGLIO AULA </label>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p class=\"col-md-6\"> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaiable-seats-detail\">\n                        <p class=\"col-md-6\">Posti disponibili:</p>\n                        <p class=\"col-md-6\"> " + data.AvaiableSeats + " </p>\n                    </div>\n                    ");
     })
         .fail(function (jqXHR, textStatus, err) {
         alert('An error occurred while retrieving room details');

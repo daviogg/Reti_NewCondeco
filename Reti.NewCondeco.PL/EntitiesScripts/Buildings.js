@@ -28,7 +28,8 @@ function createBuilding() {
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
-        $('#frmBuilding').append("<label>Edificio Creato! Nome : " + name + ", Indirizzo: " + address + "</label>");
+        $('#building-created').empty();
+        $('#building-created').append("<label>Edificio Creato! Nome : " + name + ", Indirizzo: " + address + "</label>");
         _self.getAllBuildings();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error has occurred while creating building");
@@ -39,7 +40,7 @@ function getBuildingDetails(buildingId) {
     $.getJSON(webApiUri + 'buildings/GetBuilding/' + buildingId)
         .done(function (data) {
         var isAvaible = data.IsAvaible ? "Si" : "No";
-        $('#building-detail').append("<label>DETTAGLIO EDIFICIO </label>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p class=\"col-md-6\"> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"address-detail\">\n                        <p class=\"col-md-6\">Indirizzo:</p>\n                        <p class=\"col-md-6\"> " + data.Address + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaible-detail\">\n                        <p class=\"col-md-6\">Disponibile:</p>\n                        <p class=\"col-md-6\"> " + isAvaible + " </p>\n                    </div>");
+        $('#building-detail').append("<label>DETTAGLIO EDIFICIO </label>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p class=\"col-md-6\"> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"address-detail\">\n                        <p class=\"col-md-6\">Indirizzo:</p>\n                        <p class=\"col-md-6\"> " + data.Address + " </p>\n                    </div>\n                    ");
         return data;
     })
         .fail(function (jqXHR, textStatus, err) {

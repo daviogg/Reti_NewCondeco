@@ -39,7 +39,8 @@ function createBuilding(): void {
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
-        $('#frmBuilding').append(`<label>Edificio Creato! Nome : ${name}, Indirizzo: ${address}</label>`);
+        $('#building-created').empty();
+        $('#building-created').append(`<label>Edificio Creato! Nome : ${name}, Indirizzo: ${address}</label>`);
         _self.getAllBuildings();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error has occurred while creating building");
@@ -63,10 +64,7 @@ function getBuildingDetails (buildingId: number) {
                         <p class="col-md-6">Indirizzo:</p>
                         <p class="col-md-6"> ${data.Address} </p>
                     </div>
-                    <div class="row" id="avaible-detail">
-                        <p class="col-md-6">Disponibile:</p>
-                        <p class="col-md-6"> ${isAvaible} </p>
-                    </div>`);
+                    `);
             return data
         })
         .fail(function (jqXHR, textStatus, err) {

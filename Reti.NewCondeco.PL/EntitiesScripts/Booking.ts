@@ -13,11 +13,10 @@ let bookingArray: Array<Booking> = [];
 
 function getAllBookings() {
     $('#list-of-booking').empty();
-    $('#select-room-booking').empty();
     $.getJSON(webApiUri + 'booking/GetAll/').done(booking => {
         bookingArray = booking;
         $.each(booking, (key, item: Booking) => {
-            $('#list-of-booking').append(`<button type="button" class="list-group-item"  onclick="getBookingDetails(${item.BookingId})">${item.Description}</button>`);
+            $('#list-of-booking').append(`<button type="button" class="list-group-item"  onclick="getBookingDetails(${item.BookingId})">${item.Description} - Id: ${item.BookingId} </button>`);
         });
     });
 }
@@ -43,7 +42,9 @@ function createBooking(): void {
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
-        $('#frmBooking').append(`<label>Prenotazione Creata! Descrizione : ${description}, risorsa: ${resourceId}, stanza: ${roomId}, dalle: ${startDate} alle: ${endDate}</label>`);
+        $('#booking-created').empty();
+        $('#booking-created').append(`<label>Prenotazione Creata! Descrizione : ${description}, risorsa: ${resourceId}, stanza: ${roomId}, dalle: ${startDate} alle: ${endDate}</label>`);
+        $("#end-booking-section").hide();
         _self.getAllBookings();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error has occurred while creating booking");
@@ -62,11 +63,11 @@ function getBookingDetails(bookingId: number) {
                         <p class="col-md-6"> ${data.Description} </p>
                     </div>
                     <div class="row" id="room-detail">
-                        <p class="col-md-6">Aula:</p>
+                        <p class="col-md-6">IdAula:</p>
                         <p class="col-md-6"> ${data.BRoomId} </p>
                     </div>
                     <div class="row" id="resource-detail">
-                        <p class="col-md-6">Risorsa:</p>
+                        <p class="col-md-6">IdRisorsa:</p>
                         <p class="col-md-6"> ${data.BResourceId} </p>
                     </div>
                     <div class="row" id="start-date-detail">
@@ -117,7 +118,6 @@ function checkAvaible() {
         _self.getAllRooms();
     });
 
-    $("#end-booking-section").show();
     $.ajax({
         type: "POST",
         url: webApiUri + `booking/CheckAvaibleResources`,
@@ -129,7 +129,6 @@ function checkAvaible() {
     }).done(function (data) {
         _self.getAll();
     });
-
 
 }
 

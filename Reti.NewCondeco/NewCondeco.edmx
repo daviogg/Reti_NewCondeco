@@ -45,6 +45,7 @@
           <Property Name="AvaiableSeats" Type="int" Nullable="false" />
           <Property Name="RoomBuildingId" Type="int" Nullable="false" />
           <Property Name="IsAvaible" Type="bit" Nullable="false" />
+          <Property Name="OriginalAvaibleSeats" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Booking_Resources">
           <End Role="Resources" Type="Self.Resources" Multiplicity="1" />
@@ -152,6 +153,7 @@
           <Property Name="IsAvaible" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Building" Relationship="Self.FK_Rooms_Buildings" FromRole="Rooms" ToRole="Buildings" />
           <NavigationProperty Name="Bookings" Relationship="NewCondecoModel.FK_Booking_Rooms" FromRole="Room" ToRole="Booking" />
+          <Property Name="OriginalAvaibleSeats" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Booking_Resources">
           <End Role="Resources" Type="Self.Resource" Multiplicity="1" />
@@ -252,6 +254,7 @@
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="NewCondecoModel.Room">
               <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="OriginalAvaibleSeats" ColumnName="OriginalAvaibleSeats" />
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="AvaiableSeats" ColumnName="AvaiableSeats" />

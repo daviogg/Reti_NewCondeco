@@ -25,6 +25,7 @@ namespace Reti.NewCondeco
         public int AvaiableSeats { get; set; }
         public int RoomBuildingId { get; set; }
         public bool IsAvaible { get; set; }
+        public int OriginalAvaibleSeats { get; set; }
     
         public virtual Building Building { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

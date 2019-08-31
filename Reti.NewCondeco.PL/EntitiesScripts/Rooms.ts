@@ -12,11 +12,13 @@ class Room {
 
 function getAllRooms() {
     $('#list-of-rooms').empty();
+    $('#select-room-booking').empty();
+
     $.getJSON(webApiUri + 'rooms/GetAll/').done(room => {
         $.each(room, (key, item: Room) => {
             $('#list-of-rooms').append(`<button type="button" class="list-group-item"  onclick="getRoomDetails(${item.RoomId})">${item.Name}</button>`);
             if (item.IsAvaible)
-             $('#select-room-booking').append(`<option value="${item.RoomId}">${item.Name}</option>`);
+                $('#select-room-booking').append(`<option value="${item.RoomId}">${item.Name} IdStanza: ${item.RoomId}</option>`);
         });
     });
 }
@@ -41,7 +43,8 @@ function createRoom(): void {
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
-        $('#frmRoom').append(`<label>Aula Creata! Nome : ${name}, Posti disponibili: ${avaiableSeats}</label>`);
+        $('#room-created').empty();
+        $('#room-created').append(`<label>Aula Creata! Nome : ${name}, Posti disponibili: ${avaiableSeats}</label>`);
         _self.getAllRooms();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error has occurred while creating room");
@@ -65,10 +68,7 @@ function getRoomDetails(roomId: number) {
                         <p class="col-md-6">Posti disponibili:</p>
                         <p class="col-md-6"> ${data.AvaiableSeats} </p>
                     </div>
-                    <div class="row" id="avaible-detail">
-                        <p class="col-md-6">Disponibile:</p>
-                        <p class="col-md-6"> ${isAvaible} </p>
-                    </div>`);
+                    `);
         })
         .fail(function (jqXHR, textStatus, err) {
             alert('An error occurred while retrieving room details');

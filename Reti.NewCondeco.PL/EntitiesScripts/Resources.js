@@ -18,7 +18,7 @@ function getAll() {
         $.each(resource, function (key, item) {
             $('#list-of-resources').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getResourceDetails(" + item.ResourceID + ")\">" + item.UserName + "</button>");
             if (item.IsAvaible)
-                $('#select-resource-booking').append("<option value=\"" + item.ResourceID + "\">" + item.Name + " " + item.SurName + "</option>");
+                $('#select-resource-booking').append("<option value=\"" + item.ResourceID + "\">" + item.UserName + " - Id: " + item.ResourceID + "</option>");
         });
     });
 }
@@ -39,27 +39,32 @@ function createResource() {
         else
             username = name + surname.substr(0, 4);
     }
-    $.ajax({
-        type: "POST",
-        url: webApiUri + 'resources/PostResource',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            ResourceID: -1,
-            UserName: username.toLowerCase(),
-            SurName: $('#user-surname').val(),
-            Name: $('#user-name').val(),
-            Mail: $('#email').val(),
-            IsAvaible: true,
-            Booking: [],
-        })
-    }).done(function (data) {
-        console.log(JSON.stringify(data));
-        $('#resource-created').empty();
-        $('#resource-created').append("<label id=\"resource-created\">Risorsa Creata! Nome : " + name + " Cognome: " + surname + "</label>");
-        _self.getAll();
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        alert("An error has occurred while creating resource");
-    });
+    if (name != "" || surname != "") {
+        $.ajax({
+            type: "POST",
+            url: webApiUri + 'resources/PostResource',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                ResourceID: -1,
+                UserName: username.toLowerCase(),
+                SurName: $('#user-surname').val(),
+                Name: $('#user-name').val(),
+                Mail: $('#email').val(),
+                IsAvaible: true,
+                Booking: [],
+            })
+        }).done(function (data) {
+            console.log(JSON.stringify(data));
+            $('#resource-created').empty();
+            $('#resource-created').append("<label id=\"resource-created\">Risorsa Creata! Nome : " + name + " Cognome: " + surname + "</label>");
+            _self.getAll();
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert("An error has occurred while creating resource");
+        });
+    }
+    else {
+        alert("nome e cognome obbligatori!");
+    }
 }
 function getResourceDetails(resourceId) {
     $('#resource-detail').empty();
@@ -81,7 +86,7 @@ function deleteResource(resourceId) {
         $('#resource-detail').empty();
         _self.getAll();
     }).fail(function (jqXHR, textStatus, errorThrown) {
-        alert("An error has occurred while deleting UserTitle");
+        alert("An error has occurred while deleting resource");
     });
 }
 //# sourceMappingURL=Resources.js.map

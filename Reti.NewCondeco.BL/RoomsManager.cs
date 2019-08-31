@@ -57,18 +57,41 @@ namespace Reti.NewCondeco.BL
             return rooms;
         }
 
-        public void UpdateAvaible(int roomId, bool isAvaible)
+        public void UpdateAvaible(int roomId, int value)
         {
             
             try
             {
                 RoomRepository roomRepo = new RoomRepository();
                 var room = GetRoomById(roomId);
-                room.IsAvaible = isAvaible;
+                room.AvaiableSeats += value;
+                if (room.AvaiableSeats <= 0)
+                    room.IsAvaible = false;
+                else
+                    room.IsAvaible = true;
+
                 roomRepo.Update(room);
                 GlobalUnitOfWork.Commit();
 
             }catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateResetAvaibleSeats(int roomId)
+        {
+            try
+            {
+                RoomRepository roomRepo = new RoomRepository();
+                var room = GetRoomById(roomId);
+                room.AvaiableSeats = room.OriginalAvaibleSeats;
+
+                roomRepo.Update(room);
+                GlobalUnitOfWork.Commit();
+
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

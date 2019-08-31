@@ -9,7 +9,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
@@ -51,7 +50,7 @@
                         <label for="email">E-Mail</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com">
                     </div>
-                    <button type="button" class="btn btn-default" onclick="createResource();">Create</button>
+                    <button type="button" class="btn btn-default" onclick="createResource();">Crea</button>
                     <div id="resource-created"></div>
                 </form>
             </div>
@@ -85,7 +84,8 @@
                         <input type="text" class="form-control" id="building-address" name="building-address" placeholder="Via Giuseppe Garibaldi, 1, Busto Arsizio">
                     </div>
 
-                    <button type="button" class="btn btn-default" onclick="createBuilding();">Create</button>
+                    <button type="button" class="btn btn-default" onclick="createBuilding();">Crea</button>
+                    <div id="building-created"></div>
                 </form>
             </div>
 
@@ -123,7 +123,8 @@
                         <select class="form-control" id="select-room-building" name="select-room-building"></select>
                     </div>
 
-                    <button type="button" class="btn btn-default" onclick="createRoom();">Create</button>
+                    <button type="button" class="btn btn-default" onclick="createRoom();">Crea</button>
+                    <div id="room-created"></div>
                 </form>
             </div>
 
@@ -200,6 +201,7 @@
                             <select class="form-control" id="select-room-booking" name="select-room-booking"></select>
                         </div>
                         <button type="button" class="btn btn-default" onclick="createBooking();">Prenota</button>
+                        <div id="booking-created"></div>
                     </section>
                 </form>
             </div>
@@ -209,7 +211,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label>LISTA PRENOTAZIONI</label>
-                    <input type="text" id="filterList" onkeyup="filter()" placeholder="Cerca per nome">
+                    <input style="margin-left:5px" type="text" id="filterList" onkeyup="filter()" placeholder="Cerca per nome o Id">
                     <div class="list-group" id="list-of-booking"></div>
                 </div>
                 <div class="col-md-6" id="booking-detail"></div>

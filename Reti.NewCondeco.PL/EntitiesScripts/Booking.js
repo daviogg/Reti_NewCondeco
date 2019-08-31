@@ -6,11 +6,10 @@ var Booking = /** @class */ (function () {
 var bookingArray = [];
 function getAllBookings() {
     $('#list-of-booking').empty();
-    $('#select-room-booking').empty();
     $.getJSON(webApiUri + 'booking/GetAll/').done(function (booking) {
         bookingArray = booking;
         $.each(booking, function (key, item) {
-            $('#list-of-booking').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getBookingDetails(" + item.BookingId + ")\">" + item.Description + "</button>");
+            $('#list-of-booking').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getBookingDetails(" + item.BookingId + ")\">" + item.Description + " - Id: " + item.BookingId + " </button>");
         });
     });
 }
@@ -34,7 +33,9 @@ function createBooking() {
         })
     }).done(function (data) {
         console.log(JSON.stringify(data));
-        $('#frmBooking').append("<label>Prenotazione Creata! Descrizione : " + description + ", risorsa: " + resourceId + ", stanza: " + roomId + ", dalle: " + startDate + " alle: " + endDate + "</label>");
+        $('#booking-created').empty();
+        $('#booking-created').append("<label>Prenotazione Creata! Descrizione : " + description + ", risorsa: " + resourceId + ", stanza: " + roomId + ", dalle: " + startDate + " alle: " + endDate + "</label>");
+        $("#end-booking-section").hide();
         _self.getAllBookings();
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error has occurred while creating booking");
@@ -44,7 +45,7 @@ function getBookingDetails(bookingId) {
     $('#booking-detail').empty();
     $.getJSON(webApiUri + 'booking/GetBooking/' + bookingId)
         .done(function (data) {
-        $('#booking-detail').append("<label>DETTAGLIO PRENOTAZIONE <a style=\"margin-left:5px;\" onclick=\"deleteBooking(" + data.BookingId + ")\">Delete</a> </label>\n                    <div class=\"row\" id=\"description-detail\">\n                        <p class=\"col-md-6\">Descrizione:</p>\n                        <p class=\"col-md-6\"> " + data.Description + " </p>\n                    </div>\n                    <div class=\"row\" id=\"room-detail\">\n                        <p class=\"col-md-6\">Aula:</p>\n                        <p class=\"col-md-6\"> " + data.BRoomId + " </p>\n                    </div>\n                    <div class=\"row\" id=\"resource-detail\">\n                        <p class=\"col-md-6\">Risorsa:</p>\n                        <p class=\"col-md-6\"> " + data.BResourceId + " </p>\n                    </div>\n                    <div class=\"row\" id=\"start-date-detail\">\n                        <p class=\"col-md-6\">Dalle:</p>\n                        <p class=\"col-md-6\"> " + data.DateStart + " </p>\n                    </div>\n                    <div class=\"row\" id=\"end-date-detail\">\n                        <p class=\"col-md-6\">Alle:</p>\n                        <p class=\"col-md-6\"> " + data.DateEnd + " </p>\n                    </div>\n                    ");
+        $('#booking-detail').append("<label>DETTAGLIO PRENOTAZIONE <a style=\"margin-left:5px;\" onclick=\"deleteBooking(" + data.BookingId + ")\">Delete</a> </label>\n                    <div class=\"row\" id=\"description-detail\">\n                        <p class=\"col-md-6\">Descrizione:</p>\n                        <p class=\"col-md-6\"> " + data.Description + " </p>\n                    </div>\n                    <div class=\"row\" id=\"room-detail\">\n                        <p class=\"col-md-6\">IdAula:</p>\n                        <p class=\"col-md-6\"> " + data.BRoomId + " </p>\n                    </div>\n                    <div class=\"row\" id=\"resource-detail\">\n                        <p class=\"col-md-6\">IdRisorsa:</p>\n                        <p class=\"col-md-6\"> " + data.BResourceId + " </p>\n                    </div>\n                    <div class=\"row\" id=\"start-date-detail\">\n                        <p class=\"col-md-6\">Dalle:</p>\n                        <p class=\"col-md-6\"> " + data.DateStart + " </p>\n                    </div>\n                    <div class=\"row\" id=\"end-date-detail\">\n                        <p class=\"col-md-6\">Alle:</p>\n                        <p class=\"col-md-6\"> " + data.DateEnd + " </p>\n                    </div>\n                    ");
         return data;
     })
         .fail(function (jqXHR, textStatus, err) {
@@ -78,7 +79,6 @@ function checkAvaible() {
     }).done(function (data) {
         _self.getAllRooms();
     });
-    $("#end-booking-section").show();
     $.ajax({
         type: "POST",
         url: webApiUri + "booking/CheckAvaibleResources",
