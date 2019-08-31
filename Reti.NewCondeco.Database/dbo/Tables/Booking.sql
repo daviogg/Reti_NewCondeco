@@ -1,9 +1,10 @@
-﻿CREATE TABLE [dbo].[Booking](
+CREATE TABLE [dbo].[Booking](
 	[BookingId] [int] IDENTITY(1,1) NOT NULL,
 	[Description] [nvarchar](max) NULL,
 	[BResourceId] [int] NOT NULL,
 	[DateStart] [datetime] NOT NULL,
 	[DateEnd] [datetime] NOT NULL,
+	[BRoomId] [int] NOT NULL,
  CONSTRAINT [PK_Booking] PRIMARY KEY CLUSTERED 
 (
 	[BookingId] ASC
@@ -15,3 +16,9 @@ REFERENCES [dbo].[Resources] ([ResourceID])
 GO
 
 ALTER TABLE [dbo].[Booking] CHECK CONSTRAINT [FK_Booking_Resources]
+GO
+ALTER TABLE [dbo].[Booking]  WITH CHECK ADD  CONSTRAINT [FK_Booking_Rooms] FOREIGN KEY([BRoomId])
+REFERENCES [dbo].[Rooms] ([RoomId])
+GO
+
+ALTER TABLE [dbo].[Booking] CHECK CONSTRAINT [FK_Booking_Rooms]

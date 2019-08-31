@@ -4,6 +4,7 @@
 	[AvaiableSeats] [int] NOT NULL,
 	[RoomBuildingId] [int] NOT NULL,
 	[IsAvaible] [bit] NOT NULL,
+	[OriginalAvaibleSeats] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[RoomId] ASC
@@ -18,4 +19,11 @@ GO
 
 ALTER TABLE [dbo].[Rooms] CHECK CONSTRAINT [FK_Rooms_Buildings]
 GO
+
+
+GO
 ALTER TABLE [dbo].[Rooms] ADD  DEFAULT ((1)) FOR [IsAvaible]
+GO
+ALTER TABLE [dbo].[Rooms] ADD  DEFAULT ((1)) FOR [IsAvaible]
+GO
+ALTER TABLE [dbo].[Rooms] ADD  CONSTRAINT [DF_Rooms_OriginalAvaibleSeats]  DEFAULT ((0)) FOR [OriginalAvaibleSeats]

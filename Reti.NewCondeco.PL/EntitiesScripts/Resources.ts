@@ -56,7 +56,7 @@ function createResource(): void {
             username = name + surname.substr(0, 4);
     }
 
-    if (name != "" || surname != "") {
+    if (name != "" && surname != "") {
         $.ajax({
             type: "POST",
             url: webApiUri + 'resources/PostResource',
@@ -79,7 +79,7 @@ function createResource(): void {
             alert("An error has occurred while creating resource");
         });
     } else {
-        alert("nome e cognome obbligatori!");
+        alert("Nome e Cognome obbligatori!");
     }
 
 }

@@ -28,27 +28,32 @@ function createBooking(): void {
     let roomId: number = <number>$('#select-room-booking').val();
     let startDate: Date = $('#start-booking-date').data('date');
     let endDate: Date = $('#end-booking-date').data('date');
-    $.ajax({
-        type: "POST",
-        url: webApiUri + 'booking/PostBooking',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            BookingId: null,
-            Description: description,
-            BResourceId: resourceId,
-            DateStart: startDate,
-            DateEnd: endDate,
-            BRoomId: roomId
-        })
-    }).done(function (data) {
-        console.log(JSON.stringify(data));
-        $('#booking-created').empty();
-        $('#booking-created').append(`<label>Prenotazione Creata! Descrizione : ${description}, risorsa: ${resourceId}, stanza: ${roomId}, dalle: ${startDate} alle: ${endDate}</label>`);
-        $("#end-booking-section").hide();
-        _self.getAllBookings();
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        alert("An error has occurred while creating booking");
-    });
+
+    if (description != "" && startDate != null && endDate != null) {
+        $.ajax({
+            type: "POST",
+            url: webApiUri + 'booking/PostBooking',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                BookingId: null,
+                Description: description,
+                BResourceId: resourceId,
+                DateStart: startDate,
+                DateEnd: endDate,
+                BRoomId: roomId
+            })
+        }).done(function (data) {
+            console.log(JSON.stringify(data));
+            $('#booking-created').empty();
+            $('#booking-created').append(`<label>Prenotazione Creata! Descrizione : ${description}, risorsa: ${resourceId}, stanza: ${roomId}, dalle: ${startDate} alle: ${endDate}</label>`);
+            $("#end-booking-section").hide();
+            _self.getAllBookings();
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert("An error has occurred while creating booking");
+        });
+    } else {
+        alert("Descrizione obbligatoria!");
+    }
 
 }
 
@@ -105,30 +110,34 @@ function checkAvaible() {
     let startDate: Date = $('#start-booking-date').data('date');
     let endDate: Date = $('#end-booking-date').data('date');
 
-    $("#end-booking-section").show();
-    $.ajax({
-        type: "POST",
-        url: webApiUri + `booking/CheckAvaibleRooms`,
-        contentType: 'application/json',
-        data: JSON.stringify({
-            DateStart: startDate,
-            DateEnd: endDate
-        })
-    }).done(function (data) {
-        _self.getAllRooms();
-    });
+    if (startDate != null && endDate != null) {
+        $("#end-booking-section").show();
+        $.ajax({
+            type: "POST",
+            url: webApiUri + `booking/CheckAvaibleRooms`,
+            contentType: 'application/json',
+            data: JSON.stringify({
+                DateStart: startDate,
+                DateEnd: endDate
+            })
+        }).done(function (data) {
+            _self.getAllRooms();
+        });
 
-    $.ajax({
-        type: "POST",
-        url: webApiUri + `booking/CheckAvaibleResources`,
-        contentType: 'application/json',
-        data: JSON.stringify({
-            DateStart: startDate,
-            DateEnd: endDate
-        })
-    }).done(function (data) {
-        _self.getAll();
-    });
+        $.ajax({
+            type: "POST",
+            url: webApiUri + `booking/CheckAvaibleResources`,
+            contentType: 'application/json',
+            data: JSON.stringify({
+                DateStart: startDate,
+                DateEnd: endDate
+            })
+        }).done(function (data) {
+            _self.getAll();
+        });
+    } else {
+        alert("Data inizio e fine obbligatorie!");
+    }
 
 }
 

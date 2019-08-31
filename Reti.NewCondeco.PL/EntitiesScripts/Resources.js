@@ -39,7 +39,7 @@ function createResource() {
         else
             username = name + surname.substr(0, 4);
     }
-    if (name != "" || surname != "") {
+    if (name != "" && surname != "") {
         $.ajax({
             type: "POST",
             url: webApiUri + 'resources/PostResource',
@@ -63,7 +63,7 @@ function createResource() {
         });
     }
     else {
-        alert("nome e cognome obbligatori!");
+        alert("Nome e Cognome obbligatori!");
     }
 }
 function getResourceDetails(resourceId) {

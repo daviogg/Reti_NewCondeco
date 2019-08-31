@@ -16,24 +16,29 @@ function getAllBuildings() {
 function createBuilding() {
     var name = $('#building-name').val().toString();
     var address = $('#building-address').val().toString();
-    $.ajax({
-        type: "POST",
-        url: webApiUri + 'buildings/PostBuilding',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            BuildingId: null,
-            Name: name,
-            Address: address,
-            IsAvaible: true
-        })
-    }).done(function (data) {
-        console.log(JSON.stringify(data));
-        $('#building-created').empty();
-        $('#building-created').append("<label>Edificio Creato! Nome : " + name + ", Indirizzo: " + address + "</label>");
-        _self.getAllBuildings();
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        alert("An error has occurred while creating building");
-    });
+    if (name != "") {
+        $.ajax({
+            type: "POST",
+            url: webApiUri + 'buildings/PostBuilding',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                BuildingId: null,
+                Name: name,
+                Address: address,
+                IsAvaible: true
+            })
+        }).done(function (data) {
+            console.log(JSON.stringify(data));
+            $('#building-created').empty();
+            $('#building-created').append("<label>Edificio Creato! Nome : " + name + ", Indirizzo: " + address + "</label>");
+            _self.getAllBuildings();
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert("An error has occurred while creating building");
+        });
+    }
+    else {
+        alert("Nome edificio obbligatorio!");
+    }
 }
 function getBuildingDetails(buildingId) {
     $('#building-detail').empty();

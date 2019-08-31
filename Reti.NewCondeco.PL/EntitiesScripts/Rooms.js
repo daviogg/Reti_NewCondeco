@@ -18,26 +18,30 @@ function createRoom() {
     var name = $('#room-name').val().toString();
     var avaiableSeats = $('#room-avaiable-seats').val();
     var buildingId = $('#select-room-building').val();
-    $.ajax({
-        type: "POST",
-        url: webApiUri + 'rooms/PostRoom',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            RoomId: null,
-            Name: name,
-            AvaiableSeats: avaiableSeats,
-            RoomBuildingId: buildingId,
-            IsAvaible: true,
-            OriginalAvaibleSeats: avaiableSeats
-        })
-    }).done(function (data) {
-        console.log(JSON.stringify(data));
-        $('#room-created').empty();
-        $('#room-created').append("<label>Aula Creata! Nome : " + name + ", Posti disponibili: " + avaiableSeats + "</label>");
-        _self.getAllRooms();
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        alert("An error has occurred while creating room");
-    });
+    if (name != "") {
+        $.ajax({
+            type: "POST",
+            url: webApiUri + 'rooms/PostRoom',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                RoomId: null,
+                Name: name,
+                AvaiableSeats: avaiableSeats,
+                RoomBuildingId: buildingId,
+                IsAvaible: true,
+                OriginalAvaibleSeats: avaiableSeats
+            })
+        }).done(function (data) {
+            console.log(JSON.stringify(data));
+            $('#room-created').empty();
+            $('#room-created').append("<label>Aula Creata! Nome : " + name + ", Posti disponibili: " + avaiableSeats + "</label>");
+            _self.getAllRooms();
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert("An error has occurred while creating room");
+        });
+    }
+    else
+        alert("Nome obbligatorio!");
 }
 function getRoomDetails(roomId) {
     $('#room-detail').empty();
