@@ -8,14 +8,15 @@ function getAllRooms() {
     $.getJSON(webApiUri + 'rooms/GetAll/').done(function (room) {
         $.each(room, function (key, item) {
             $('#list-of-rooms').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getRoomDetails(" + item.RoomId + ")\">" + item.Name + "</button>");
+            $('#select-room-booking').append("<option value=\"" + item.RoomId + "\">" + item.Name + "</option>");
         });
     });
 }
 function createRoom() {
-    //$('#frmRoom').empty();
     var name = $('#room-name').val().toString();
     var avaiableSeats = $('#room-avaiable-seats').val();
     var buildingId = $('#select-room-building').val();
+    $('#frmRoom').empty();
     $.ajax({
         type: "POST",
         url: webApiUri + 'rooms/PostRoom',
@@ -40,7 +41,7 @@ function getRoomDetails(roomId) {
     $.getJSON(webApiUri + 'rooms/GetRoom/' + roomId)
         .done(function (data) {
         var isAvaible = data.IsAvaible ? "Si" : "No";
-        $('#room-detail').append("<label>DETTAGLIO AULA <a style=\"margin-left:5px;\" onclick=\"deleteRoom(" + data.RoomId + ")\">Delete</a></label>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p class=\"col-md-6\"> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaiable-seats-detail\">\n                        <p class=\"col-md-6\">Posti disponibili:</p>\n                        <p class=\"col-md-6\"> " + data.AvaiableSeats + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaible-detail\">\n                        <p class=\"col-md-6\">Disponibile:</p>\n                        <p class=\"col-md-6\"> " + isAvaible + " </p>\n                    </div>");
+        $('#room-detail').append("<label>DETTAGLIO AULA </label>\n                    <div class=\"row\" id=\"name-detail\">\n                        <p class=\"col-md-6\">Nome:</p>\n                        <p class=\"col-md-6\"> " + data.Name + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaiable-seats-detail\">\n                        <p class=\"col-md-6\">Posti disponibili:</p>\n                        <p class=\"col-md-6\"> " + data.AvaiableSeats + " </p>\n                    </div>\n                    <div class=\"row\" id=\"avaible-detail\">\n                        <p class=\"col-md-6\">Disponibile:</p>\n                        <p class=\"col-md-6\"> " + isAvaible + " </p>\n                    </div>");
     })
         .fail(function (jqXHR, textStatus, err) {
         alert('An error occurred while retrieving room details');

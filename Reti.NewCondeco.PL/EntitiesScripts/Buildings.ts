@@ -22,9 +22,11 @@ function getAllBuildings() {
 
 function createBuilding(): void {
 
-    //$('#frmBuilding').empty();
+   
     let name: string = $('#building-name').val().toString();
     let address: string = $('#building-address').val().toString();
+
+    $('#frmBuilding').empty();
 
     $.ajax({
         type: "POST",
@@ -53,7 +55,7 @@ function getBuildingDetails (buildingId: number) {
 
             let isAvaible: string = data.IsAvaible ? "Si" : "No";
 
-            $('#building-detail').append(`<label>DETTAGLIO EDIFICIO <a style="margin-left:5px;" onclick="deleteBuilding(${data.BuildingId})">Delete</a></label>
+            $('#building-detail').append(`<label>DETTAGLIO EDIFICIO </label>
                     <div class="row" id="name-detail">
                         <p class="col-md-6">Nome:</p>
                         <p class="col-md-6"> ${data.Name} </p>

@@ -16,14 +16,15 @@ function getAll() {
     $.getJSON(webApiUri + 'resources/GetAll/').done(function (resource) {
         $.each(resource, function (key, item) {
             $('#list-of-resources').append("<button type=\"button\" class=\"list-group-item\"  onclick=\"getResourceDetails(" + item.ResourceID + ")\">" + item.UserName + "</button>");
+            $('#select-resource-booking').append("<option value=\"" + item.ResourceID + "\">" + item.Name + " " + item.SurName + "</option>");
         });
     });
 }
 function createResource() {
-    //$('#frmUser').empty();
     var name = $('#user-name').val().toString();
     var surname = $('#user-surname').val().toString();
     var username = "";
+    $('#frmUser').empty();
     if (surname.length >= 4) {
         username = surname.substr(0, 4);
         if (name.length >= 2)

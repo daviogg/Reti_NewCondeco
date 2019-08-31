@@ -115,11 +115,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\Booking.ts" />
-    <TypeScriptCompile Include="Scripts\Buildings.ts" />
-    <TypeScriptCompile Include="Scripts\Manager.ts" />
-    <TypeScriptCompile Include="Scripts\Resources.ts" />
-    <TypeScriptCompile Include="Scripts\Rooms.ts" />
+    <TypeScriptCompile Include="EntitiesScripts\Booking.ts" />
+    <TypeScriptCompile Include="EntitiesScripts\Buildings.ts" />
+    <TypeScriptCompile Include="EntitiesScripts\Manager.ts" />
+    <TypeScriptCompile Include="EntitiesScripts\Resources.ts" />
+    <TypeScriptCompile Include="EntitiesScripts\Rooms.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

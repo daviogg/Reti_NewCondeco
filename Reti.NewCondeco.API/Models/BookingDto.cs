@@ -10,6 +10,7 @@ namespace Reti.NewCondeco.API.Models
         public int BookingId { get; set; }
         public string Description { get; set; }
         public int BResourceId { get; set; }
+        public int BRoomId { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get; set; }
 

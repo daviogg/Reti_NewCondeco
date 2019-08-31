@@ -1,22 +1,21 @@
-﻿var webApiUri = 'https://localhost:44394/api/';
-
+var _this = this;
+var webApiUri = 'https://localhost:44394/api/';
 //#region Page code
-$(document).ready(() => {
+$(document).ready(function () {
     // Retrieve the lists of Users and UserTitles
-    this.activeNav(ElementType.risorse);
+    _this.activeNav(ElementType.risorse);
 });
 //#endregion
-
 //#region enums
-enum ElementType {
-    risorse = 0,
-    aule = 1,
-    edifici = 2,
-    prenotazioni = 3
-}
+var ElementType;
+(function (ElementType) {
+    ElementType[ElementType["risorse"] = 0] = "risorse";
+    ElementType[ElementType["aule"] = 1] = "aule";
+    ElementType[ElementType["edifici"] = 2] = "edifici";
+    ElementType[ElementType["prenotazioni"] = 3] = "prenotazioni";
+})(ElementType || (ElementType = {}));
 //#endregion
-
-function activeNav(type: ElementType) {
+function activeNav(type) {
     switch (type) {
         case ElementType.risorse:
             resetNavActiveClass();
@@ -41,30 +40,28 @@ function activeNav(type: ElementType) {
             break;
         case ElementType.prenotazioni:
             resetNavActiveClass();
-            hideAllSections() 
+            hideAllSections();
             $("#booking-nav").addClass("Active");
             $("#booking-section").show();
+            $('#select-room-booking').empty();
+            $('#select-resource-booking').empty();
+            _self.getAllBookings();
             _self.getAll();
             _self.getAllRooms();
             break;
         default:
     }
 }
-
 function resetNavActiveClass() {
     $("#resources-nav").removeClass("Active");
-    $("#rooms-nav" ).removeClass("Active");
-    $("#buildings-nav").removeClass("Active"); 
+    $("#rooms-nav").removeClass("Active");
+    $("#buildings-nav").removeClass("Active");
     $("#booking-nav").removeClass("Active");
 }
-
 function hideAllSections() {
     $("#resources-section").hide();
     $("#buildings-section").hide();
     $("#rooms-section").hide();
     $("#booking-section").hide();
 }
-
-
-
-
+//# sourceMappingURL=Manager.js.map

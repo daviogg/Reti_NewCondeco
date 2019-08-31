@@ -27,6 +27,7 @@ function getAll() {
 
         $.each(resource, (key, item: Resource) => {
             $('#list-of-resources').append(`<button type="button" class="list-group-item"  onclick="getResourceDetails(${item.ResourceID})">${item.UserName}</button>`);
+            $('#select-resource-booking').append(`<option value="${item.ResourceID}">${item.Name} ${item.SurName}</option>`);
         });
 
     });
@@ -34,10 +35,12 @@ function getAll() {
 
 function createResource(): void {
 
-    //$('#frmUser').empty();
+    
     let name: string = $('#user-name').val().toString();
     let surname: string = $('#user-surname').val().toString();
     let username: string = "";
+
+    $('#frmUser').empty();
 
     if (surname.length >= 4) {
         username = surname.substr(0, 4);

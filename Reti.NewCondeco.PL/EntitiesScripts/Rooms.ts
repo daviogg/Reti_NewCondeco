@@ -15,16 +15,19 @@ function getAllRooms() {
     $.getJSON(webApiUri + 'rooms/GetAll/').done(room => {
         $.each(room, (key, item: Room) => {
             $('#list-of-rooms').append(`<button type="button" class="list-group-item"  onclick="getRoomDetails(${item.RoomId})">${item.Name}</button>`);
+            $('#select-room-booking').append(`<option value="${item.RoomId}">${item.Name}</option>`);
         });
     });
 }
 
 function createRoom(): void {
 
-    //$('#frmRoom').empty();
+    
     let name: string = $('#room-name').val().toString();
     let avaiableSeats: number = <number>$('#room-avaiable-seats').val();
     let buildingId: number = <number>$('#select-room-building').val();
+
+    $('#frmRoom').empty();
 
     $.ajax({
         type: "POST",
@@ -54,7 +57,7 @@ function getRoomDetails(roomId: number) {
 
             let isAvaible: string = data.IsAvaible ? "Si" : "No";
 
-            $('#room-detail').append(`<label>DETTAGLIO AULA <a style="margin-left:5px;" onclick="deleteRoom(${data.RoomId})">Delete</a></label>
+            $('#room-detail').append(`<label>DETTAGLIO AULA </label>
                     <div class="row" id="name-detail">
                         <p class="col-md-6">Nome:</p>
                         <p class="col-md-6"> ${data.Name} </p>
