@@ -3,10 +3,10 @@
 
 Step di configurazione per la solution:
   
-  - Clonare il repository
-  - Installare i pacchetti npm
-  - Restore dei Nuget packages
-  - Verificare che come start-up project si abbiano "Reti.NewCondeco.Api" e "Reti.NewCondeco.PL"
-  - Impostare il project URL del progetto WEB API sull'indirizzo "https://localhost:44394/" (Per evitare CORS)
-  - Impostare il project URL del progetto "Reti.NewCondeco.PL"   "https://localhost:44374/"
-  - Lanciare lo script del DB per crearlo sulla propria macchina, lo script si trova all'interno del progetto "Reti.NewCondeco.Database"
+  - Clone the repository
+  - Install npm packages --> npm install
+  - Restore npm packages --> npm restore
+  - Set "Reti.NewCondeco.Api" and "Reti.NewCondeco.PL" as a startup project
+  - Setup project url as "Reti.NewCondeco.Api" to "https://localhost:44394/" for avoid CORS
+  - Setup project url as "Reti.NewCondeco.PL"  to "https://localhost:44374/"
+  - Execute db script for initial setup of database in "Reti.NewCondeco.Database"
