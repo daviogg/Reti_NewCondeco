@@ -1,7 +1,7 @@
 # Reti_NewCondeco
 .Net web application for learning
 
-Step di configurazione per la solution:
+Initialize solution:
   
   - Clone the repository
   - Install npm packages --> npm install
